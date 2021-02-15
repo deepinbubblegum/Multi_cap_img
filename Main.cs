@@ -8,51 +8,187 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
 using System.Windows.Forms;
-using valGlobal = Multi_cap_img.Global;
+using System.Net;
+using System.Net.Sockets;
+using AForge;
+using AForge.Video;
+using AForge.Video.DirectShow;
+
 
 namespace Multi_cap_img
 {
     public partial class Main : Form
     {
-        Settings settingsForm = new Settings();
+
+        public Settings settingsForm;
+
         public Main()
         {
             InitializeComponent();
+            logs_box_display.ScrollBars = ScrollBars.Vertical;
         }
 
-        public static void Thread_FormManagement()
+        private void Main_Load(object sender, EventArgs e)
         {
-            for (int i = 0; i < 10; i++)
-            {
-                Console.WriteLine("ThreadProc: {0}", i);
-                // Yield the rest of the time slice.
-                Thread.Sleep(1);
-            }
-        }
+            get_deviceCamera();
 
-        public static void Main_Load(object sender, EventArgs e)
-        {
-            Thread t = new Thread(new ThreadStart(Thread_FormManagement));
-            t.Start();
-            t.Join();
+            // Create Thread
+            Thread UDPserver = new Thread(new ThreadStart(ServerListen));
+            UDPserver.Start();
+            Global.isStartUDPServer = true;
         }
-
         private void Settings_Click(object sender, EventArgs e)
         {
-            if (valGlobal.isOpenFormSetting)
+            if (Global.isOpenFormSetting)
             {
                 settingsForm.Focus();
             }
             else
             {
-                this.Hide();
+                settingsForm = new Settings();
                 settingsForm.Show();
-                valGlobal.isOpenFormSetting = true;
-                valGlobal.isHideMainForm  = true;
+                Global.isOpenFormSetting = true;
                 Console.WriteLine("OpenFormSetting Done");
             }
         }
 
+        public void get_deviceCamera()
+        {
+            int counting = 1;
+            string previous = "";
+            SelectDevicePreview.Items.Clear();
+            Global.GetDevice_Camera();
+            foreach (FilterInfo Item in Global.cameraDeviec)
+            {
+                if (previous == Item.Name)
+                {
+                    counting += 1;
+                    SelectDevicePreview.Items.Add(Item.Name + "_" + Convert.ToString(counting));
+                }
+                else
+                {
+                    SelectDevicePreview.Items.Add(Item.Name);
+                }
+                
+                previous = Item.Name;
+            }
+            SelectDevicePreview.SelectedIndex = 0;
+        }
 
+        public void logs_box(string DataLogs = "")
+        {
+            if (InvokeRequired)
+            {
+                this.Invoke(new Action<string>(logs_box), new object[] { DataLogs });
+                return;
+            }
+            string sent = string.Format("{0:HH:mm:ss tt} : ", DateTime.Now);
+            if (DataLogs == "")
+            {
+                DataLogs = Global.logs_global;
+            }
+            sent += DataLogs;
+            logs_box_display.AppendText(sent);
+            logs_box_display.AppendText(Environment.NewLine);
+        }
+
+        public void ServerListen()
+        {
+            int recv;
+            byte[] data = new byte[1024];
+            IPEndPoint ipep = new IPEndPoint(IPAddress.Any, 5005);
+
+            Socket newsock = new Socket(AddressFamily.InterNetwork,
+                            SocketType.Dgram, ProtocolType.Udp);
+            newsock.Bind(ipep);
+            logs_box("Waiting for a client...");
+
+            IPEndPoint sender = new IPEndPoint(IPAddress.Any, 0);
+            EndPoint Remote = (EndPoint)(sender);
+
+            while (true)
+            {
+                data = new byte[1024];
+                recv = newsock.ReceiveFrom(data, ref Remote);
+                string udp_data = Convert.ToString(Encoding.ASCII.GetString(data, 0, recv));
+                logs_box(udp_data);
+                UDP_controler(udp_data);
+                newsock.SendTo(data, recv, SocketFlags.None, Remote);
+            }
+        }
+
+        void UDP_controler(string udp_data)
+        {
+            string str = udp_data.ToUpper();
+            switch (str)
+            {
+                case "P":
+                    this.Invoke(new Action(() => {
+                        Preview_start();
+                    }));
+                    break;
+                case "!P":
+                    this.Invoke(new Action(() => {
+                        Preview_stop();
+                    }));
+                    break;
+                default:
+                    logs_box(Logs_txt.CMD_not_found);
+                    break;
+            }
+        }
+
+        void Preview_start()
+        {
+            if (Global.isPreview)
+            {
+                Global.CaptureDeviceFrame.Stop();
+                Global.isPreview = false;
+            }
+
+            try
+            {
+                Global.CaptureDeviceFrame = new VideoCaptureDevice(Global.cameraDeviec[SelectDevicePreview.SelectedIndex].MonikerString);
+                Global.CaptureDeviceFrame.NewFrame += new NewFrameEventHandler(CaptureNewFrame);
+                Global.CaptureDeviceFrame.Start();
+                Global.isPreview = true;
+                logs_box(Logs_txt.preview_start);
+            }
+            catch
+            {
+                logs_box(Logs_txt.preview_start_err);
+            }
+        }
+
+        void Preview_stop()
+        {
+            Global.CaptureDeviceFrame.Stop();
+        }
+
+        void CaptureNewFrame(object sender, NewFrameEventArgs eventArgs)
+        {
+            Bitmap CapFrame = (Bitmap)eventArgs.Frame.Clone();
+            PreviewBox.Image = CapFrame;
+        }
+
+        private void Preview_Click(object sender, EventArgs e)
+        {
+            this.Preview_start();
+        }
+
+        private void StopPreview_Click(object sender, EventArgs e)
+        {
+            this.Preview_stop();
+        }
+
+        private void btnRef_Click(object sender, EventArgs e)
+        {
+            get_deviceCamera();
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }

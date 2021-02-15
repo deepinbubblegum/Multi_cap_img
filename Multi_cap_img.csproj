@@ -65,6 +65,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Global.cs" />
+    <Compile Include="Logs_txt.cs" />
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>

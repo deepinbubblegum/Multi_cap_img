@@ -7,12 +7,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using valGlobal = Multi_cap_img.Global;
+using AForge;
+using AForge.Video;
+using AForge.Video.DirectShow;
 
 namespace Multi_cap_img
 {
     public partial class Settings : Form
     {
+
         public Settings()
         {
             InitializeComponent();
@@ -20,8 +23,16 @@ namespace Multi_cap_img
 
         private void Settings_FormClosed(object sender, FormClosedEventArgs e)
         {
-            valGlobal.isOpenFormSetting = false;
-            valGlobal.isHideMainForm = false;
+            Global.isOpenFormSetting = false;
+        }
+
+        private void Settings_Load(object sender, EventArgs e)
+        {
+            Global.GetDevice_Camera();
+            foreach (FilterInfo Item in Global.cameraDeviec)
+            {
+                CheckCameraList.Items.Add(Item.Name);
+            }
         }
     }
 }
