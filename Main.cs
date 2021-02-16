@@ -54,23 +54,10 @@ namespace Multi_cap_img
 
         public void get_deviceCamera()
         {
-            int counting = 1;
-            string previous = "";
             SelectDevicePreview.Items.Clear();
-            Global.GetDevice_Camera();
-            foreach (FilterInfo Item in Global.cameraDeviec)
+            foreach (string item in Global.Addlist_device_camera())
             {
-                if (previous == Item.Name)
-                {
-                    counting += 1;
-                    SelectDevicePreview.Items.Add(Item.Name + "_" + Convert.ToString(counting));
-                }
-                else
-                {
-                    SelectDevicePreview.Items.Add(Item.Name);
-                }
-                
-                previous = Item.Name;
+                SelectDevicePreview.Items.Add(item);
             }
             SelectDevicePreview.SelectedIndex = 0;
         }

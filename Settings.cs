@@ -24,14 +24,24 @@ namespace Multi_cap_img
         private void Settings_FormClosed(object sender, FormClosedEventArgs e)
         {
             Global.isOpenFormSetting = false;
+            List<ListItem> selected = new List<ListItem>();
+            foreach (int indexItem in CheckCameraList.Items)
+            {
+
+            }
         }
 
         private void Settings_Load(object sender, EventArgs e)
         {
-            Global.GetDevice_Camera();
+            /*Global.GetDevice_Camera();
             foreach (FilterInfo Item in Global.cameraDeviec)
             {
                 CheckCameraList.Items.Add(Item.Name);
+            }*/
+
+            foreach (string Item in Global.Addlist_device_camera())
+            {
+                CheckCameraList.Items.Add(Item);
             }
         }
     }

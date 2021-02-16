@@ -17,11 +17,38 @@ namespace Multi_cap_img
         public static VideoCaptureDevice CaptureDeviceFrame;
         public static bool isStartUDPServer = false;
         public static string logs_global = "";
+        public static List<string> DevicesList = new List<string>();
+        public static List<string> SelectDeviceList = new List<string>();
 
-        public static void GetDevice_Camera()
+        private static void GetDevice_Camera()
         {
             cameraDeviec = null;
             cameraDeviec = new FilterInfoCollection(FilterCategory.VideoInputDevice);
+        }
+
+        public static List<string> Addlist_device_camera()
+        {
+            int counting = 1;
+            string previous = "";
+            // SelectDevicePreview.Items.Clear();
+            DevicesList.Clear();
+            GetDevice_Camera();
+            foreach (FilterInfo Item in Global.cameraDeviec)
+            {
+                if (previous == Item.Name)
+                {
+                    counting += 1;
+                    DevicesList.Add(Item.Name + "_" + Convert.ToString(counting));
+                   // SelectDevicePreview.Items.Add(Item.Name + "_" + Convert.ToString(counting));
+                }
+                else
+                {
+                    DevicesList.Add(Item.Name);
+                   // SelectDevicePreview.Items.Add(Item.Name);
+                }
+                previous = Item.Name;
+            }
+            return DevicesList;
         }
     }
 
