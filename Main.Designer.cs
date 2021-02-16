@@ -39,6 +39,7 @@ namespace Multi_cap_img
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Settings = new System.Windows.Forms.ToolStripMenuItem();
             this.GroupBoxDisplay = new System.Windows.Forms.GroupBox();
+            this.btnRef = new System.Windows.Forms.Button();
             this.StopPreview = new System.Windows.Forms.Button();
             this.Preview = new System.Windows.Forms.Button();
             this.SelectDevicePreview = new System.Windows.Forms.ComboBox();
@@ -46,11 +47,15 @@ namespace Multi_cap_img
             this.PreviewBox = new System.Windows.Forms.PictureBox();
             this.LogsBoxGroup = new System.Windows.Forms.GroupBox();
             this.logs_box_display = new System.Windows.Forms.TextBox();
-            this.btnRef = new System.Windows.Forms.Button();
+            this.tabControl_control = new System.Windows.Forms.TabControl();
+            this.Camera_control = new System.Windows.Forms.TabPage();
+            this.label2 = new System.Windows.Forms.Label();
+            this.ResolutionBox = new System.Windows.Forms.ComboBox();
             this.menubar.SuspendLayout();
             this.GroupBoxDisplay.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PreviewBox)).BeginInit();
             this.LogsBoxGroup.SuspendLayout();
+            this.tabControl_control.SuspendLayout();
             this.SuspendLayout();
             // 
             // menubar
@@ -125,6 +130,9 @@ namespace Multi_cap_img
             this.GroupBoxDisplay.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.GroupBoxDisplay.Controls.Add(this.ResolutionBox);
+            this.GroupBoxDisplay.Controls.Add(this.label2);
+            this.GroupBoxDisplay.Controls.Add(this.tabControl_control);
             this.GroupBoxDisplay.Controls.Add(this.btnRef);
             this.GroupBoxDisplay.Controls.Add(this.StopPreview);
             this.GroupBoxDisplay.Controls.Add(this.Preview);
@@ -136,6 +144,18 @@ namespace Multi_cap_img
             this.GroupBoxDisplay.Size = new System.Drawing.Size(1240, 599);
             this.GroupBoxDisplay.TabIndex = 2;
             this.GroupBoxDisplay.TabStop = false;
+            // 
+            // btnRef
+            // 
+            this.btnRef.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnRef.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnRef.BackgroundImage")));
+            this.btnRef.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnRef.Location = new System.Drawing.Point(1210, 11);
+            this.btnRef.Name = "btnRef";
+            this.btnRef.Size = new System.Drawing.Size(25, 25);
+            this.btnRef.TabIndex = 5;
+            this.btnRef.UseVisualStyleBackColor = true;
+            this.btnRef.Click += new System.EventHandler(this.btnRef_Click);
             // 
             // StopPreview
             // 
@@ -165,7 +185,7 @@ namespace Multi_cap_img
             this.SelectDevicePreview.FormattingEnabled = true;
             this.SelectDevicePreview.Location = new System.Drawing.Point(1085, 13);
             this.SelectDevicePreview.Name = "SelectDevicePreview";
-            this.SelectDevicePreview.Size = new System.Drawing.Size(124, 21);
+            this.SelectDevicePreview.Size = new System.Drawing.Size(122, 21);
             this.SelectDevicePreview.TabIndex = 2;
             // 
             // label1
@@ -214,17 +234,45 @@ namespace Multi_cap_img
             this.logs_box_display.Size = new System.Drawing.Size(1226, 45);
             this.logs_box_display.TabIndex = 0;
             // 
-            // btnRef
+            // tabControl_control
             // 
-            this.btnRef.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnRef.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnRef.BackgroundImage")));
-            this.btnRef.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnRef.Location = new System.Drawing.Point(1213, 11);
-            this.btnRef.Name = "btnRef";
-            this.btnRef.Size = new System.Drawing.Size(25, 25);
-            this.btnRef.TabIndex = 5;
-            this.btnRef.UseVisualStyleBackColor = true;
-            this.btnRef.Click += new System.EventHandler(this.btnRef_Click);
+            this.tabControl_control.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabControl_control.Controls.Add(this.Camera_control);
+            this.tabControl_control.Location = new System.Drawing.Point(1003, 73);
+            this.tabControl_control.Name = "tabControl_control";
+            this.tabControl_control.SelectedIndex = 0;
+            this.tabControl_control.Size = new System.Drawing.Size(231, 491);
+            this.tabControl_control.TabIndex = 6;
+            // 
+            // Camera_control
+            // 
+            this.Camera_control.Location = new System.Drawing.Point(4, 22);
+            this.Camera_control.Name = "Camera_control";
+            this.Camera_control.Padding = new System.Windows.Forms.Padding(3);
+            this.Camera_control.Size = new System.Drawing.Size(223, 465);
+            this.Camera_control.TabIndex = 0;
+            this.Camera_control.Text = "Camera Control";
+            this.Camera_control.UseVisualStyleBackColor = true;
+            // 
+            // label2
+            // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(1000, 43);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(60, 13);
+            this.label2.TabIndex = 7;
+            this.label2.Text = "Resolution:";
+            // 
+            // ResolutionBox
+            // 
+            this.ResolutionBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.ResolutionBox.FormattingEnabled = true;
+            this.ResolutionBox.Location = new System.Drawing.Point(1066, 40);
+            this.ResolutionBox.Name = "ResolutionBox";
+            this.ResolutionBox.Size = new System.Drawing.Size(168, 21);
+            this.ResolutionBox.TabIndex = 8;
             // 
             // Main
             // 
@@ -245,6 +293,7 @@ namespace Multi_cap_img
             ((System.ComponentModel.ISupportInitialize)(this.PreviewBox)).EndInit();
             this.LogsBoxGroup.ResumeLayout(false);
             this.LogsBoxGroup.PerformLayout();
+            this.tabControl_control.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -269,6 +318,10 @@ namespace Multi_cap_img
         private System.Windows.Forms.GroupBox LogsBoxGroup;
         private System.Windows.Forms.TextBox logs_box_display;
         private System.Windows.Forms.Button btnRef;
+        private System.Windows.Forms.TabControl tabControl_control;
+        private System.Windows.Forms.TabPage Camera_control;
+        private System.Windows.Forms.ComboBox ResolutionBox;
+        private System.Windows.Forms.Label label2;
     }
 }
 

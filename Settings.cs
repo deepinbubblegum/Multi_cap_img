@@ -1,15 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Web;
 using System.Windows.Forms;
-using AForge;
-using AForge.Video;
-using AForge.Video.DirectShow;
 
 namespace Multi_cap_img
 {
@@ -24,25 +15,34 @@ namespace Multi_cap_img
         private void Settings_FormClosed(object sender, FormClosedEventArgs e)
         {
             Global.isOpenFormSetting = false;
-            List<ListItem> selected = new List<ListItem>();
-            foreach (int indexItem in CheckCameraList.Items)
-            {
-
-            }
         }
 
         private void Settings_Load(object sender, EventArgs e)
         {
-            /*Global.GetDevice_Camera();
-            foreach (FilterInfo Item in Global.cameraDeviec)
-            {
-                CheckCameraList.Items.Add(Item.Name);
-            }*/
-
             foreach (string Item in Global.Addlist_device_camera())
             {
                 CheckCameraList.Items.Add(Item);
             }
+        }
+
+        private void Close_setting_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void SaveConfig_Click(object sender, EventArgs e)
+        {
+            // Get Device Selected in CheckBoxList
+            Global.SelectedDeviceList.Clear();
+            for (int index = 0; index < CheckCameraList.Items.Count; index++)
+            {
+                if (CheckCameraList.GetItemChecked(index))
+                {
+                    Global.SelectedDeviceList.Add(index);
+                    Console.WriteLine(index.ToString());
+                }
+            }
+            this.Close();
         }
     }
 }

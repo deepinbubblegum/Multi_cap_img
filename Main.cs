@@ -60,6 +60,8 @@ namespace Multi_cap_img
                 SelectDevicePreview.Items.Add(item);
             }
             SelectDevicePreview.SelectedIndex = 0;
+            Global.get_resolution(0);
+            Update_resolution_box();
         }
 
         public void logs_box(string DataLogs = "")
@@ -176,6 +178,15 @@ namespace Multi_cap_img
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void Update_resolution_box()
+        {
+            for(int index = 0; index < Global.Resolution_List.Count; index++)
+            {
+                ResolutionBox.Items.Add(Global.Resolution_List[index]);
+            }
+            ResolutionBox.SelectedIndex = 0;
         }
     }
 }
