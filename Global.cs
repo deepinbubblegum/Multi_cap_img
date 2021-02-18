@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using AForge;
 using AForge.Video;
@@ -23,6 +24,8 @@ namespace Multi_cap_img
         public static List<string> Resolution_List = new List<string>();
         public static int ResolutionPreview_Previous = 0;
         public static Dictionary<string, string> DirCameraThr = new Dictionary<string, string>();
+        public static List<Thread> workerThreads = new List<Thread>();
+        public static List<VideoCaptureDevice> CaptureDeviceFrame_thr = new List<VideoCaptureDevice>();
 
         private static void GetDevice_Camera()
         {

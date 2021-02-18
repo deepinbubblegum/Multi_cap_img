@@ -231,6 +231,10 @@ namespace Multi_cap_img
             else
             {
                 btnCapture.Text = "Capture";
+                for (int index = 0; index < Global.workerThreads.Count; index++)
+                {
+                    Global.CaptureDeviceFrame_thr[index].Stop();
+                }
                 Global.DirCameraThr.Clear();
             }
         }
@@ -242,8 +246,13 @@ namespace Multi_cap_img
                 int indexDevice = Global.SelectedDeviceList[index];
                 Thread thread = new Thread(() => CameraCapture(index, indexDevice));
                 thread.Name = "Camera_" + index.ToString();
+                Global.workerThreads.Add(thread);
                 thread.Start();
-                //logs_box("indexDevice" + Global.SelectedDeviceList[index]);
+            }
+
+            foreach (Thread thread in Global.workerThreads)
+            {
+                thread.Join(1);
             }
         }
 
@@ -262,19 +271,18 @@ namespace Multi_cap_img
 
         void CaptureNewFrame(object sender, NewFrameEventArgs eventArgs)
         {
-            Console.WriteLine(sender.GetHashCode());
-            //sender.AForge.Video.DirectShow.VideoCaptureDevice
-            //Console.WriteLine(sender.ToString());
+            //Console.WriteLine(sender.GetHashCode());
             string filepath = Environment.CurrentDirectory;
             string subPath = Global.DirCameraThr[sender.GetHashCode().ToString()];
+            string Path_dir = "ImagesPath";
             Bitmap bitmap = (Bitmap)eventArgs.Frame.Clone();
             Create_dir_exists(subPath);
-            string fileName = System.IO.Path.Combine(filepath + @"\" + subPath, @"" + subPath + "_" + Global.DirCameraThr[subPath] + ".jpg");
-            string fileName_conv = fileName.Replace(@"\\", @"\"); // Save file path bug wait fix
+            string fileName = System.IO.Path.Combine(filepath + @"\" + Path_dir + @"\" + subPath, @"" + subPath + "_" + Global.DirCameraThr[subPath] + ".jpg");
+            string fileName_conv = fileName.Replace(@"\\", @"\");
+            //Console.WriteLine(fileName_conv);
             bitmap.Save(fileName_conv, ImageFormat.Jpeg);
             Global.DirCameraThr[subPath] = (Convert.ToInt32(Global.DirCameraThr[subPath]) + 1).ToString();
             bitmap.Dispose();
-            //string fileName = System.IO.Path.Combine(filepath, @"name.bmp");
         }
 
         //Task_saveImage
@@ -282,12 +290,14 @@ namespace Multi_cap_img
         {
             Global.Addlist_device_camera();
             VideoCaptureDevice CaptureDeviceFrame = new VideoCaptureDevice(Global.cameraDeviec[indexDevice].MonikerString);
+            Global.CaptureDeviceFrame_thr.Add(CaptureDeviceFrame);
             CaptureDeviceFrame.NewFrame += new NewFrameEventHandler(CaptureNewFrame);
-            Thread theard = Thread.CurrentThread;
+            Thread thread = Thread.CurrentThread;
+            
             //Console.WriteLine("Thread Name: {0}", CaptureDeviceFrame.GetHashCode());
             string souce_device = CaptureDeviceFrame.Source;
-            Global.DirCameraThr.Add(CaptureDeviceFrame.GetHashCode().ToString(), theard.Name);
-            Global.DirCameraThr.Add(theard.Name, 0.ToString());
+            Global.DirCameraThr.Add(CaptureDeviceFrame.GetHashCode().ToString(), thread.Name);
+            Global.DirCameraThr.Add(thread.Name, 0.ToString());
             CaptureDeviceFrame.Start();
             logs_box(Logs_txt.theard_start + number_cramera);
         }
