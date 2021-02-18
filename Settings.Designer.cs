@@ -32,6 +32,7 @@ namespace Multi_cap_img
             this.CheckCameraList = new System.Windows.Forms.CheckedListBox();
             this.Close_setting = new System.Windows.Forms.Button();
             this.SaveConfig = new System.Windows.Forms.Button();
+            this.SelectAll = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // CheckCameraList
@@ -68,6 +69,16 @@ namespace Multi_cap_img
             this.SaveConfig.UseVisualStyleBackColor = true;
             this.SaveConfig.Click += new System.EventHandler(this.SaveConfig_Click);
             // 
+            // SelectAll
+            // 
+            this.SelectAll.Location = new System.Drawing.Point(12, 415);
+            this.SelectAll.Name = "SelectAll";
+            this.SelectAll.Size = new System.Drawing.Size(63, 23);
+            this.SelectAll.TabIndex = 2;
+            this.SelectAll.Text = "All";
+            this.SelectAll.UseVisualStyleBackColor = true;
+            this.SelectAll.Click += new System.EventHandler(this.SelectAll_Click);
+            // 
             // Settings
             // 
             this.AcceptButton = this.SaveConfig;
@@ -75,6 +86,7 @@ namespace Multi_cap_img
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.Close_setting;
             this.ClientSize = new System.Drawing.Size(262, 450);
+            this.Controls.Add(this.SelectAll);
             this.Controls.Add(this.SaveConfig);
             this.Controls.Add(this.Close_setting);
             this.Controls.Add(this.CheckCameraList);
@@ -95,5 +107,6 @@ namespace Multi_cap_img
         private System.Windows.Forms.CheckedListBox CheckCameraList;
         private System.Windows.Forms.Button Close_setting;
         private System.Windows.Forms.Button SaveConfig;
+        private System.Windows.Forms.Button SelectAll;
     }
 }

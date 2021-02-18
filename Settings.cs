@@ -30,7 +30,7 @@ namespace Multi_cap_img
             this.Close();
         }
 
-        private void SaveConfig_Click(object sender, EventArgs e)
+        public void SaveConfig_Click(object sender, EventArgs e)
         {
             // Get Device Selected in CheckBoxList
             Global.SelectedDeviceList.Clear();
@@ -43,6 +43,14 @@ namespace Multi_cap_img
                 }
             }
             this.Close();
+        }
+
+        private void SelectAll_Click(object sender, EventArgs e)
+        {
+            for (int index = 0; index < CheckCameraList.Items.Count; index++)
+            {
+                CheckCameraList.SetItemCheckState(index, CheckState.Checked);
+            }
         }
     }
 }
