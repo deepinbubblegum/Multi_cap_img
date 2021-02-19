@@ -234,7 +234,7 @@ namespace Multi_cap_img
                 Global.CaptureDeviceFrame.Stop();
             }
             Global.ResolutionPreview_Previous = ResolutionBox.SelectedIndex;
-            Preview_Click(null, null);
+            //Preview_Click(null, null);
         }
 
         [Obsolete]
@@ -248,8 +248,10 @@ namespace Multi_cap_img
                     Global.CaptureDeviceFrame.SignalToStop();
                     //Global.CaptureDeviceFrame.Stop();
                     Global.isPreview = false;
+                    StopPreview_Click(null, null);
                 }
                 CreateThrCameraCapture();
+                CameraControl_tab.Enabled = false;
             }
             else
             {
@@ -260,6 +262,7 @@ namespace Multi_cap_img
                     Global.Threads_pool[index].Abort();
                 }
                 Global.DirCameraThr.Clear();
+                CameraControl_tab.Enabled = true;
             }
         }
 

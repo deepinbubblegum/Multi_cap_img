@@ -42,32 +42,8 @@ namespace Multi_cap_img
             this.btnCapture = new System.Windows.Forms.Button();
             this.ResolutionBox = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.tabControl_control = new System.Windows.Forms.TabControl();
+            this.CameraControl_tab = new System.Windows.Forms.TabControl();
             this.Camera_control = new System.Windows.Forms.TabPage();
-            this.checkBox8 = new System.Windows.Forms.CheckBox();
-            this.checkBox7 = new System.Windows.Forms.CheckBox();
-            this.checkBox6 = new System.Windows.Forms.CheckBox();
-            this.checkBox5 = new System.Windows.Forms.CheckBox();
-            this.checkBox4 = new System.Windows.Forms.CheckBox();
-            this.checkBox3 = new System.Windows.Forms.CheckBox();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.numericUpDown9 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown8 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown7 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown6 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown5 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown4 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
-            this.trackBar9 = new System.Windows.Forms.TrackBar();
-            this.trackBar8 = new System.Windows.Forms.TrackBar();
-            this.trackBar7 = new System.Windows.Forms.TrackBar();
-            this.trackBar6 = new System.Windows.Forms.TrackBar();
-            this.trackBar5 = new System.Windows.Forms.TrackBar();
-            this.trackBar4 = new System.Windows.Forms.TrackBar();
-            this.trackBar3 = new System.Windows.Forms.TrackBar();
-            this.trackBar2 = new System.Windows.Forms.TrackBar();
             this.label3 = new System.Windows.Forms.Label();
             this.B_Auto = new System.Windows.Forms.CheckBox();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
@@ -84,24 +60,8 @@ namespace Multi_cap_img
             this.logs_box_display = new System.Windows.Forms.TextBox();
             this.menubar.SuspendLayout();
             this.GroupBoxDisplay.SuspendLayout();
-            this.tabControl_control.SuspendLayout();
+            this.CameraControl_tab.SuspendLayout();
             this.Camera_control.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown9)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown8)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown7)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown6)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar9)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar8)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar7)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar6)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PreviewBox)).BeginInit();
@@ -183,7 +143,7 @@ namespace Multi_cap_img
             this.GroupBoxDisplay.Controls.Add(this.btnCapture);
             this.GroupBoxDisplay.Controls.Add(this.ResolutionBox);
             this.GroupBoxDisplay.Controls.Add(this.label2);
-            this.GroupBoxDisplay.Controls.Add(this.tabControl_control);
+            this.GroupBoxDisplay.Controls.Add(this.CameraControl_tab);
             this.GroupBoxDisplay.Controls.Add(this.btnRef);
             this.GroupBoxDisplay.Controls.Add(this.StopPreview);
             this.GroupBoxDisplay.Controls.Add(this.Preview);
@@ -227,43 +187,19 @@ namespace Multi_cap_img
             this.label2.TabIndex = 7;
             this.label2.Text = "Resolution:";
             // 
-            // tabControl_control
+            // CameraControl_tab
             // 
-            this.tabControl_control.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.CameraControl_tab.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tabControl_control.Controls.Add(this.Camera_control);
-            this.tabControl_control.Location = new System.Drawing.Point(796, 73);
-            this.tabControl_control.Name = "tabControl_control";
-            this.tabControl_control.SelectedIndex = 0;
-            this.tabControl_control.Size = new System.Drawing.Size(438, 491);
-            this.tabControl_control.TabIndex = 6;
+            this.CameraControl_tab.Controls.Add(this.Camera_control);
+            this.CameraControl_tab.Location = new System.Drawing.Point(796, 73);
+            this.CameraControl_tab.Name = "CameraControl_tab";
+            this.CameraControl_tab.SelectedIndex = 0;
+            this.CameraControl_tab.Size = new System.Drawing.Size(438, 491);
+            this.CameraControl_tab.TabIndex = 6;
             // 
             // Camera_control
             // 
-            this.Camera_control.Controls.Add(this.checkBox8);
-            this.Camera_control.Controls.Add(this.checkBox7);
-            this.Camera_control.Controls.Add(this.checkBox6);
-            this.Camera_control.Controls.Add(this.checkBox5);
-            this.Camera_control.Controls.Add(this.checkBox4);
-            this.Camera_control.Controls.Add(this.checkBox3);
-            this.Camera_control.Controls.Add(this.checkBox2);
-            this.Camera_control.Controls.Add(this.checkBox1);
-            this.Camera_control.Controls.Add(this.numericUpDown9);
-            this.Camera_control.Controls.Add(this.numericUpDown8);
-            this.Camera_control.Controls.Add(this.numericUpDown7);
-            this.Camera_control.Controls.Add(this.numericUpDown6);
-            this.Camera_control.Controls.Add(this.numericUpDown5);
-            this.Camera_control.Controls.Add(this.numericUpDown4);
-            this.Camera_control.Controls.Add(this.numericUpDown3);
-            this.Camera_control.Controls.Add(this.numericUpDown2);
-            this.Camera_control.Controls.Add(this.trackBar9);
-            this.Camera_control.Controls.Add(this.trackBar8);
-            this.Camera_control.Controls.Add(this.trackBar7);
-            this.Camera_control.Controls.Add(this.trackBar6);
-            this.Camera_control.Controls.Add(this.trackBar5);
-            this.Camera_control.Controls.Add(this.trackBar4);
-            this.Camera_control.Controls.Add(this.trackBar3);
-            this.Camera_control.Controls.Add(this.trackBar2);
             this.Camera_control.Controls.Add(this.label3);
             this.Camera_control.Controls.Add(this.B_Auto);
             this.Camera_control.Controls.Add(this.numericUpDown1);
@@ -278,202 +214,10 @@ namespace Multi_cap_img
             this.Camera_control.Text = "Camera Control";
             this.Camera_control.UseVisualStyleBackColor = true;
             // 
-            // checkBox8
-            // 
-            this.checkBox8.AutoSize = true;
-            this.checkBox8.Location = new System.Drawing.Point(404, 236);
-            this.checkBox8.Name = "checkBox8";
-            this.checkBox8.Size = new System.Drawing.Size(15, 14);
-            this.checkBox8.TabIndex = 16;
-            this.checkBox8.UseVisualStyleBackColor = true;
-            // 
-            // checkBox7
-            // 
-            this.checkBox7.AutoSize = true;
-            this.checkBox7.Location = new System.Drawing.Point(404, 211);
-            this.checkBox7.Name = "checkBox7";
-            this.checkBox7.Size = new System.Drawing.Size(15, 14);
-            this.checkBox7.TabIndex = 16;
-            this.checkBox7.UseVisualStyleBackColor = true;
-            // 
-            // checkBox6
-            // 
-            this.checkBox6.AutoSize = true;
-            this.checkBox6.Location = new System.Drawing.Point(404, 185);
-            this.checkBox6.Name = "checkBox6";
-            this.checkBox6.Size = new System.Drawing.Size(15, 14);
-            this.checkBox6.TabIndex = 16;
-            this.checkBox6.UseVisualStyleBackColor = true;
-            // 
-            // checkBox5
-            // 
-            this.checkBox5.AutoSize = true;
-            this.checkBox5.Location = new System.Drawing.Point(404, 160);
-            this.checkBox5.Name = "checkBox5";
-            this.checkBox5.Size = new System.Drawing.Size(15, 14);
-            this.checkBox5.TabIndex = 16;
-            this.checkBox5.UseVisualStyleBackColor = true;
-            // 
-            // checkBox4
-            // 
-            this.checkBox4.AutoSize = true;
-            this.checkBox4.Location = new System.Drawing.Point(404, 134);
-            this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Size = new System.Drawing.Size(15, 14);
-            this.checkBox4.TabIndex = 16;
-            this.checkBox4.UseVisualStyleBackColor = true;
-            // 
-            // checkBox3
-            // 
-            this.checkBox3.AutoSize = true;
-            this.checkBox3.Location = new System.Drawing.Point(404, 109);
-            this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(15, 14);
-            this.checkBox3.TabIndex = 16;
-            this.checkBox3.UseVisualStyleBackColor = true;
-            // 
-            // checkBox2
-            // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(404, 83);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(15, 14);
-            this.checkBox2.TabIndex = 16;
-            this.checkBox2.UseVisualStyleBackColor = true;
-            // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(404, 58);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(15, 14);
-            this.checkBox1.TabIndex = 16;
-            this.checkBox1.UseVisualStyleBackColor = true;
-            // 
-            // numericUpDown9
-            // 
-            this.numericUpDown9.Location = new System.Drawing.Point(348, 234);
-            this.numericUpDown9.Name = "numericUpDown9";
-            this.numericUpDown9.Size = new System.Drawing.Size(45, 20);
-            this.numericUpDown9.TabIndex = 15;
-            // 
-            // numericUpDown8
-            // 
-            this.numericUpDown8.Location = new System.Drawing.Point(348, 209);
-            this.numericUpDown8.Name = "numericUpDown8";
-            this.numericUpDown8.Size = new System.Drawing.Size(45, 20);
-            this.numericUpDown8.TabIndex = 15;
-            // 
-            // numericUpDown7
-            // 
-            this.numericUpDown7.Location = new System.Drawing.Point(348, 183);
-            this.numericUpDown7.Name = "numericUpDown7";
-            this.numericUpDown7.Size = new System.Drawing.Size(45, 20);
-            this.numericUpDown7.TabIndex = 15;
-            // 
-            // numericUpDown6
-            // 
-            this.numericUpDown6.Location = new System.Drawing.Point(348, 158);
-            this.numericUpDown6.Name = "numericUpDown6";
-            this.numericUpDown6.Size = new System.Drawing.Size(45, 20);
-            this.numericUpDown6.TabIndex = 15;
-            // 
-            // numericUpDown5
-            // 
-            this.numericUpDown5.Location = new System.Drawing.Point(348, 132);
-            this.numericUpDown5.Name = "numericUpDown5";
-            this.numericUpDown5.Size = new System.Drawing.Size(45, 20);
-            this.numericUpDown5.TabIndex = 15;
-            // 
-            // numericUpDown4
-            // 
-            this.numericUpDown4.Location = new System.Drawing.Point(348, 107);
-            this.numericUpDown4.Name = "numericUpDown4";
-            this.numericUpDown4.Size = new System.Drawing.Size(45, 20);
-            this.numericUpDown4.TabIndex = 15;
-            // 
-            // numericUpDown3
-            // 
-            this.numericUpDown3.Location = new System.Drawing.Point(348, 81);
-            this.numericUpDown3.Name = "numericUpDown3";
-            this.numericUpDown3.Size = new System.Drawing.Size(45, 20);
-            this.numericUpDown3.TabIndex = 15;
-            // 
-            // numericUpDown2
-            // 
-            this.numericUpDown2.Location = new System.Drawing.Point(348, 56);
-            this.numericUpDown2.Name = "numericUpDown2";
-            this.numericUpDown2.Size = new System.Drawing.Size(45, 20);
-            this.numericUpDown2.TabIndex = 15;
-            // 
-            // trackBar9
-            // 
-            this.trackBar9.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.trackBar9.Location = new System.Drawing.Point(87, 231);
-            this.trackBar9.Name = "trackBar9";
-            this.trackBar9.Size = new System.Drawing.Size(255, 45);
-            this.trackBar9.TabIndex = 14;
-            // 
-            // trackBar8
-            // 
-            this.trackBar8.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.trackBar8.Location = new System.Drawing.Point(87, 206);
-            this.trackBar8.Name = "trackBar8";
-            this.trackBar8.Size = new System.Drawing.Size(255, 45);
-            this.trackBar8.TabIndex = 14;
-            // 
-            // trackBar7
-            // 
-            this.trackBar7.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.trackBar7.Location = new System.Drawing.Point(87, 180);
-            this.trackBar7.Name = "trackBar7";
-            this.trackBar7.Size = new System.Drawing.Size(255, 45);
-            this.trackBar7.TabIndex = 14;
-            // 
-            // trackBar6
-            // 
-            this.trackBar6.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.trackBar6.Location = new System.Drawing.Point(87, 155);
-            this.trackBar6.Name = "trackBar6";
-            this.trackBar6.Size = new System.Drawing.Size(255, 45);
-            this.trackBar6.TabIndex = 14;
-            // 
-            // trackBar5
-            // 
-            this.trackBar5.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.trackBar5.Location = new System.Drawing.Point(87, 129);
-            this.trackBar5.Name = "trackBar5";
-            this.trackBar5.Size = new System.Drawing.Size(255, 45);
-            this.trackBar5.TabIndex = 14;
-            // 
-            // trackBar4
-            // 
-            this.trackBar4.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.trackBar4.Location = new System.Drawing.Point(87, 104);
-            this.trackBar4.Name = "trackBar4";
-            this.trackBar4.Size = new System.Drawing.Size(255, 45);
-            this.trackBar4.TabIndex = 14;
-            // 
-            // trackBar3
-            // 
-            this.trackBar3.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.trackBar3.Location = new System.Drawing.Point(87, 78);
-            this.trackBar3.Name = "trackBar3";
-            this.trackBar3.Size = new System.Drawing.Size(255, 45);
-            this.trackBar3.TabIndex = 14;
-            // 
-            // trackBar2
-            // 
-            this.trackBar2.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.trackBar2.Location = new System.Drawing.Point(87, 53);
-            this.trackBar2.Name = "trackBar2";
-            this.trackBar2.Size = new System.Drawing.Size(255, 45);
-            this.trackBar2.TabIndex = 14;
-            // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(395, 10);
+            this.label3.Location = new System.Drawing.Point(389, 23);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(29, 13);
             this.label3.TabIndex = 13;
@@ -482,7 +226,7 @@ namespace Multi_cap_img
             // B_Auto
             // 
             this.B_Auto.AutoSize = true;
-            this.B_Auto.Location = new System.Drawing.Point(404, 32);
+            this.B_Auto.Location = new System.Drawing.Point(396, 49);
             this.B_Auto.Name = "B_Auto";
             this.B_Auto.Size = new System.Drawing.Size(15, 14);
             this.B_Auto.TabIndex = 12;
@@ -490,7 +234,7 @@ namespace Multi_cap_img
             // 
             // numericUpDown1
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(348, 30);
+            this.numericUpDown1.Location = new System.Drawing.Point(340, 47);
             this.numericUpDown1.Name = "numericUpDown1";
             this.numericUpDown1.Size = new System.Drawing.Size(45, 20);
             this.numericUpDown1.TabIndex = 11;
@@ -499,6 +243,8 @@ namespace Multi_cap_img
             // 
             this.CheckSync.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.CheckSync.AutoSize = true;
+            this.CheckSync.Checked = true;
+            this.CheckSync.CheckState = System.Windows.Forms.CheckState.Checked;
             this.CheckSync.Location = new System.Drawing.Point(6, 440);
             this.CheckSync.Name = "CheckSync";
             this.CheckSync.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -510,10 +256,12 @@ namespace Multi_cap_img
             // trackBar1
             // 
             this.trackBar1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.trackBar1.Location = new System.Drawing.Point(87, 27);
+            this.trackBar1.Location = new System.Drawing.Point(79, 36);
             this.trackBar1.Name = "trackBar1";
+            this.trackBar1.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.trackBar1.Size = new System.Drawing.Size(255, 45);
             this.trackBar1.TabIndex = 1;
+            this.trackBar1.TickStyle = System.Windows.Forms.TickStyle.Both;
             // 
             // Apply_setprop
             // 
@@ -564,7 +312,7 @@ namespace Multi_cap_img
             // 
             this.SelectDevicePreview.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.SelectDevicePreview.FormattingEnabled = true;
-            this.SelectDevicePreview.Location = new System.Drawing.Point(806, 19);
+            this.SelectDevicePreview.Location = new System.Drawing.Point(880, 19);
             this.SelectDevicePreview.Name = "SelectDevicePreview";
             this.SelectDevicePreview.Size = new System.Drawing.Size(122, 21);
             this.SelectDevicePreview.TabIndex = 2;
@@ -633,25 +381,9 @@ namespace Multi_cap_img
             this.menubar.PerformLayout();
             this.GroupBoxDisplay.ResumeLayout(false);
             this.GroupBoxDisplay.PerformLayout();
-            this.tabControl_control.ResumeLayout(false);
+            this.CameraControl_tab.ResumeLayout(false);
             this.Camera_control.ResumeLayout(false);
             this.Camera_control.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown9)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown8)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown7)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown6)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar9)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar8)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar7)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar6)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PreviewBox)).EndInit();
@@ -681,7 +413,7 @@ namespace Multi_cap_img
         private System.Windows.Forms.GroupBox LogsBoxGroup;
         private System.Windows.Forms.TextBox logs_box_display;
         private System.Windows.Forms.Button btnRef;
-        private System.Windows.Forms.TabControl tabControl_control;
+        private System.Windows.Forms.TabControl CameraControl_tab;
         private System.Windows.Forms.TabPage Camera_control;
         private System.Windows.Forms.ComboBox ResolutionBox;
         private System.Windows.Forms.Label label2;
@@ -692,30 +424,6 @@ namespace Multi_cap_img
         private System.Windows.Forms.NumericUpDown numericUpDown1;
         private System.Windows.Forms.CheckBox B_Auto;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.NumericUpDown numericUpDown2;
-        private System.Windows.Forms.TrackBar trackBar2;
-        private System.Windows.Forms.CheckBox checkBox8;
-        private System.Windows.Forms.CheckBox checkBox7;
-        private System.Windows.Forms.CheckBox checkBox6;
-        private System.Windows.Forms.CheckBox checkBox5;
-        private System.Windows.Forms.CheckBox checkBox4;
-        private System.Windows.Forms.CheckBox checkBox3;
-        private System.Windows.Forms.CheckBox checkBox2;
-        private System.Windows.Forms.NumericUpDown numericUpDown9;
-        private System.Windows.Forms.NumericUpDown numericUpDown8;
-        private System.Windows.Forms.NumericUpDown numericUpDown7;
-        private System.Windows.Forms.NumericUpDown numericUpDown6;
-        private System.Windows.Forms.NumericUpDown numericUpDown5;
-        private System.Windows.Forms.NumericUpDown numericUpDown4;
-        private System.Windows.Forms.NumericUpDown numericUpDown3;
-        private System.Windows.Forms.TrackBar trackBar9;
-        private System.Windows.Forms.TrackBar trackBar8;
-        private System.Windows.Forms.TrackBar trackBar7;
-        private System.Windows.Forms.TrackBar trackBar6;
-        private System.Windows.Forms.TrackBar trackBar5;
-        private System.Windows.Forms.TrackBar trackBar4;
-        private System.Windows.Forms.TrackBar trackBar3;
     }
 }
 
