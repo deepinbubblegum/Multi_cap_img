@@ -39,6 +39,7 @@ namespace Multi_cap_img
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Settings = new System.Windows.Forms.ToolStripMenuItem();
             this.GroupBoxDisplay = new System.Windows.Forms.GroupBox();
+            this.btnCapture = new System.Windows.Forms.Button();
             this.ResolutionBox = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.tabControl_control = new System.Windows.Forms.TabControl();
@@ -51,7 +52,6 @@ namespace Multi_cap_img
             this.PreviewBox = new System.Windows.Forms.PictureBox();
             this.LogsBoxGroup = new System.Windows.Forms.GroupBox();
             this.logs_box_display = new System.Windows.Forms.TextBox();
-            this.btnCapture = new System.Windows.Forms.Button();
             this.menubar.SuspendLayout();
             this.GroupBoxDisplay.SuspendLayout();
             this.tabControl_control.SuspendLayout();
@@ -146,6 +146,17 @@ namespace Multi_cap_img
             this.GroupBoxDisplay.Size = new System.Drawing.Size(1240, 599);
             this.GroupBoxDisplay.TabIndex = 2;
             this.GroupBoxDisplay.TabStop = false;
+            // 
+            // btnCapture
+            // 
+            this.btnCapture.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCapture.Location = new System.Drawing.Point(1003, 570);
+            this.btnCapture.Name = "btnCapture";
+            this.btnCapture.Size = new System.Drawing.Size(75, 23);
+            this.btnCapture.TabIndex = 9;
+            this.btnCapture.Text = "Capture";
+            this.btnCapture.UseVisualStyleBackColor = true;
+            this.btnCapture.Click += new System.EventHandler(this.btnCapture_Click);
             // 
             // ResolutionBox
             // 
@@ -274,19 +285,9 @@ namespace Multi_cap_img
             this.logs_box_display.Location = new System.Drawing.Point(6, 19);
             this.logs_box_display.Multiline = true;
             this.logs_box_display.Name = "logs_box_display";
-            this.logs_box_display.ReadOnly = true;
+            this.logs_box_display.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.logs_box_display.Size = new System.Drawing.Size(1226, 45);
             this.logs_box_display.TabIndex = 0;
-            // 
-            // btnCapture
-            // 
-            this.btnCapture.Location = new System.Drawing.Point(1003, 570);
-            this.btnCapture.Name = "btnCapture";
-            this.btnCapture.Size = new System.Drawing.Size(75, 23);
-            this.btnCapture.TabIndex = 9;
-            this.btnCapture.Text = "Capture";
-            this.btnCapture.UseVisualStyleBackColor = true;
-            this.btnCapture.Click += new System.EventHandler(this.btnCapture_Click);
             // 
             // Main
             // 

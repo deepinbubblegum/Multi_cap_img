@@ -138,23 +138,30 @@ namespace Multi_cap_img
                 Global.CaptureDeviceFrame.Stop();
                 Global.isPreview = false;
             }
-
-            try
+            if (SelectDevicePreview.SelectedIndex != -1)
             {
-                Global.CaptureDeviceFrame = new VideoCaptureDevice(Global.cameraDeviec[SelectDevicePreview.SelectedIndex].MonikerString);
-                Global.CaptureDeviceFrame.NewFrame += new NewFrameEventHandler(CaptureNewFramePreview);
-                Global.CaptureDeviceFrame.Start();
-                Global.isPreview = true;
-                logs_box(Logs_txt.preview_start);
+                try
+                {
+                    Global.CaptureDeviceFrame = new VideoCaptureDevice(Global.cameraDeviec[SelectDevicePreview.SelectedIndex].MonikerString);
+                    Global.CaptureDeviceFrame.NewFrame += new NewFrameEventHandler(CaptureNewFramePreview);
+                    Global.CaptureDeviceFrame.Start();
+                    Global.isPreview = true;
+                    logs_box(Logs_txt.preview_start);
+                }
+                catch
+                {
+                    logs_box(Logs_txt.preview_start_err);
+                }
             }
-            catch
+            else
             {
-                logs_box(Logs_txt.preview_start_err);
+                MessageBox.Show(Logs_txt.pleaseSelected_dvice);
             }
         }
 
         void Preview_stop()
         {
+            Global.CaptureDeviceFrame.SignalToStop();
             Global.CaptureDeviceFrame.Stop();
         }
 
@@ -223,7 +230,8 @@ namespace Multi_cap_img
                 btnCapture.Text = "StopCapture";
                 if (Global.isPreview)
                 {
-                    Global.CaptureDeviceFrame.Stop();
+                    Global.CaptureDeviceFrame.SignalToStop();
+                    //Global.CaptureDeviceFrame.Stop();
                     Global.isPreview = false;
                 }
                 CreateThrCameraCapture();
@@ -231,6 +239,12 @@ namespace Multi_cap_img
             else
             {
                 btnCapture.Text = "Capture";
+                for (int index = 0; index < Global.CaptureDeviceFrame_pool.Count; index++)
+                {
+                    Global.CaptureDeviceFrame_pool[index].SignalToStop();
+                    Global.Threads_pool[index].Abort();
+                    //Global.CaptureDeviceFrame_pool[index].Stop();
+                }
                 Global.DirCameraThr.Clear();
             }
         }
@@ -242,39 +256,53 @@ namespace Multi_cap_img
                 int indexDevice = Global.SelectedDeviceList[index];
                 Thread thread = new Thread(() => CameraCapture(index, indexDevice));
                 thread.Name = "Camera_" + index.ToString();
+                thread.IsBackground = true;
                 thread.Start();
-                //logs_box("indexDevice" + Global.SelectedDeviceList[index]);
+                Global.Threads_pool.Add(thread);
+            }
+
+            //int counting_thread_settime = 1;
+            foreach (Thread thread in Global.Threads_pool)
+            {
+                thread.Join(1);
+                //counting_thread_settime++;
             }
         }
 
         void Create_dir_exists(string path_dir)
         {
             string filepath = Environment.CurrentDirectory;
-            string subPath = "ImagesPath"; // Your code goes here
-            bool exists = System.IO.Directory.Exists(filepath + "/" + subPath);
+            string MainPath = "ImagesPath"; // Your code goes here
+            bool exists = System.IO.Directory.Exists(filepath + "/" + MainPath);
             if (!exists)
-                System.IO.Directory.CreateDirectory(filepath + "/" + subPath);
+            {
+                System.IO.Directory.CreateDirectory(filepath + "/" + MainPath);
+                logs_box(Logs_txt.CreateMainDir + MainPath);
+            }
+
             
-            bool exists_thr = System.IO.Directory.Exists(filepath + "/" + subPath + "/" + path_dir);
+            bool exists_thr = System.IO.Directory.Exists(filepath + "/" + MainPath + "/" + path_dir);
             if (!exists_thr)
-                System.IO.Directory.CreateDirectory(filepath + "/" + subPath + "/" + path_dir);
+            {
+                System.IO.Directory.CreateDirectory(filepath + "/" + MainPath + "/" + path_dir);
+                logs_box(Logs_txt.CreateSubDir + path_dir);
+            }
         }
 
         void CaptureNewFrame(object sender, NewFrameEventArgs eventArgs)
         {
-            Console.WriteLine(sender.GetHashCode());
-            //sender.AForge.Video.DirectShow.VideoCaptureDevice
-            //Console.WriteLine(sender.ToString());
+            //Console.WriteLine(sender.GetHashCode());
             string filepath = Environment.CurrentDirectory;
             string subPath = Global.DirCameraThr[sender.GetHashCode().ToString()];
+            string mainPath = "ImagesPath";
             Bitmap bitmap = (Bitmap)eventArgs.Frame.Clone();
             Create_dir_exists(subPath);
-            string fileName = System.IO.Path.Combine(filepath + @"\" + subPath, @"" + subPath + "_" + Global.DirCameraThr[subPath] + ".jpg");
+            string fileName = System.IO.Path.Combine(filepath + @"\" + mainPath + @"\"+ subPath, @"" + subPath + "_" + Global.DirCameraThr[subPath] + ".jpg");
             string fileName_conv = fileName.Replace(@"\\", @"\"); // Save file path bug wait fix
             bitmap.Save(fileName_conv, ImageFormat.Jpeg);
             Global.DirCameraThr[subPath] = (Convert.ToInt32(Global.DirCameraThr[subPath]) + 1).ToString();
             bitmap.Dispose();
-            //string fileName = System.IO.Path.Combine(filepath, @"name.bmp");
+            logs_box(fileName_conv);
         }
 
         //Task_saveImage
@@ -283,8 +311,8 @@ namespace Multi_cap_img
             Global.Addlist_device_camera();
             VideoCaptureDevice CaptureDeviceFrame = new VideoCaptureDevice(Global.cameraDeviec[indexDevice].MonikerString);
             CaptureDeviceFrame.NewFrame += new NewFrameEventHandler(CaptureNewFrame);
+            Global.CaptureDeviceFrame_pool.Add(CaptureDeviceFrame);
             Thread theard = Thread.CurrentThread;
-            //Console.WriteLine("Thread Name: {0}", CaptureDeviceFrame.GetHashCode());
             string souce_device = CaptureDeviceFrame.Source;
             Global.DirCameraThr.Add(CaptureDeviceFrame.GetHashCode().ToString(), theard.Name);
             Global.DirCameraThr.Add(theard.Name, 0.ToString());
