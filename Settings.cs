@@ -39,6 +39,7 @@ namespace Multi_cap_img
                 if (CheckCameraList.GetItemChecked(index))
                 {
                     Global.SelectedDeviceList.Add(index);
+                    Global.setResolution_List.Add(index, 0);
                     Console.WriteLine(index.ToString());
                 }
             }

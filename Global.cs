@@ -26,6 +26,7 @@ namespace Multi_cap_img
         public static Dictionary<string, string> DirCameraThr = new Dictionary<string, string>();
         public static List<Thread> Threads_pool = new List<Thread>();
         public static List<VideoCaptureDevice> CaptureDeviceFrame_pool = new List<VideoCaptureDevice>();
+        public static Dictionary<int, int> setResolution_List = new Dictionary<int, int>();
 
         private static void GetDevice_Camera()
         {
@@ -55,6 +56,7 @@ namespace Multi_cap_img
                 }
                 previous = Item.Name;
             }
+
             return DevicesList;
         }
 
@@ -73,18 +75,10 @@ namespace Multi_cap_img
                 string fps_Device = CaptureDeviceFrame.VideoCapabilities[index].MaximumFrameRate.ToString();
                 //Console.WriteLine("resolution , resolution_size>> " + resolution + " " + resolution_size + " " + fps_Device);
                 string str_concat = Width_resolution + " X " + Height_resolution + " fps(" + fps_Device + ")";
+                Console.WriteLine();
                 Resolution_List.Add(str_concat);
                 Console.WriteLine(str_concat);
             }
-        }
-
-        public static void Task_saveImage(object sender, NewFrameEventArgs eventArgs)
-        {
-            Bitmap CapFrame = (Bitmap)eventArgs.Frame.Clone();
-            string filepath = Environment.CurrentDirectory;
-            string fileName = System.IO.Path.Combine(filepath, @"name.bmp");
-            CapFrame.Save(fileName);
-            CapFrame.Dispose();
         }
     } 
 }

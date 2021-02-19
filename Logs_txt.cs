@@ -15,5 +15,6 @@ namespace Multi_cap_img
         public static string CreateMainDir = "Created Directory :";
         public static string CreateSubDir = "Created SubDirectory :";
         public static string pleaseSelected_dvice = "Please select Device for preview mode";
+        public static string ErrSignalStop = "Error signal stop";
     }
 }

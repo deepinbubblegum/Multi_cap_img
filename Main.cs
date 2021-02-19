@@ -144,6 +144,7 @@ namespace Multi_cap_img
                 {
                     Global.CaptureDeviceFrame = new VideoCaptureDevice(Global.cameraDeviec[SelectDevicePreview.SelectedIndex].MonikerString);
                     Global.CaptureDeviceFrame.NewFrame += new NewFrameEventHandler(CaptureNewFramePreview);
+                    Global.CaptureDeviceFrame.VideoResolution = Global.CaptureDeviceFrame.VideoCapabilities[Global.ResolutionPreview_Previous];
                     Global.CaptureDeviceFrame.Start();
                     Global.isPreview = true;
                     logs_box(Logs_txt.preview_start);
@@ -161,8 +162,16 @@ namespace Multi_cap_img
 
         void Preview_stop()
         {
-            Global.CaptureDeviceFrame.SignalToStop();
-            Global.CaptureDeviceFrame.Stop();
+            try
+            {
+                Global.CaptureDeviceFrame.SignalToStop();
+                Global.CaptureDeviceFrame.Stop();
+            }
+            catch
+            {
+                logs_box(Logs_txt.ErrSignalStop);
+            }
+
         }
 
         private void Preview_Click(object sender, EventArgs e)
@@ -215,14 +224,20 @@ namespace Multi_cap_img
             }
             Global.get_resolution(SelectDevicePreview.SelectedIndex);
             Update_resolution_box();
-            Preview_Click(null, null);
+            //Preview_Click(null, null);
         }
 
         private void ResolutionBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (Global.isPreview)
+            {
+                Global.CaptureDeviceFrame.Stop();
+            }
             Global.ResolutionPreview_Previous = ResolutionBox.SelectedIndex;
+            Preview_Click(null, null);
         }
 
+        [Obsolete]
         private void btnCapture_Click(object sender, EventArgs e)
         {
             if (btnCapture.Text == "Capture")
@@ -243,12 +258,27 @@ namespace Multi_cap_img
                 {
                     Global.CaptureDeviceFrame_pool[index].SignalToStop();
                     Global.Threads_pool[index].Abort();
-                    //Global.CaptureDeviceFrame_pool[index].Stop();
                 }
                 Global.DirCameraThr.Clear();
             }
         }
 
+        private void Apply_setprop_Click(object sender, EventArgs e)
+        {
+            if (!CheckSync.Checked)
+            {
+                Global.setResolution_List[SelectDevicePreview.SelectedIndex] = ResolutionBox.SelectedIndex;
+            }
+            else
+            {
+                for (int index = 0; index < Global.SelectedDeviceList.Count; index++)
+                {
+                    Global.setResolution_List[SelectDevicePreview.SelectedIndex] = ResolutionBox.SelectedIndex;
+                }
+            }
+        }
+
+        [Obsolete]
         private void CreateThrCameraCapture()
         {
             for (int index = 0; index < Global.SelectedDeviceList.Count; index++)
@@ -261,11 +291,9 @@ namespace Multi_cap_img
                 Global.Threads_pool.Add(thread);
             }
 
-            //int counting_thread_settime = 1;
             foreach (Thread thread in Global.Threads_pool)
             {
                 thread.Join(1);
-                //counting_thread_settime++;
             }
         }
 
@@ -291,7 +319,6 @@ namespace Multi_cap_img
 
         void CaptureNewFrame(object sender, NewFrameEventArgs eventArgs)
         {
-            //Console.WriteLine(sender.GetHashCode());
             string filepath = Environment.CurrentDirectory;
             string subPath = Global.DirCameraThr[sender.GetHashCode().ToString()];
             string mainPath = "ImagesPath";
@@ -305,12 +332,14 @@ namespace Multi_cap_img
             logs_box(fileName_conv);
         }
 
-        //Task_saveImage
+        [Obsolete]
         void CameraCapture(int number_cramera, int indexDevice)
         {
             Global.Addlist_device_camera();
             VideoCaptureDevice CaptureDeviceFrame = new VideoCaptureDevice(Global.cameraDeviec[indexDevice].MonikerString);
             CaptureDeviceFrame.NewFrame += new NewFrameEventHandler(CaptureNewFrame);
+            CaptureDeviceFrame.VideoResolution = CaptureDeviceFrame.VideoCapabilities[Convert.ToInt32(Global.setResolution_List[indexDevice])];
+            //CaptureDeviceFrame.SetCameraProperty(CameraControlProperty.Exposure, +20, CameraControlFlags.Auto);
             Global.CaptureDeviceFrame_pool.Add(CaptureDeviceFrame);
             Thread theard = Thread.CurrentThread;
             string souce_device = CaptureDeviceFrame.Source;
@@ -319,5 +348,6 @@ namespace Multi_cap_img
             CaptureDeviceFrame.Start();
             logs_box(Logs_txt.theard_start + number_cramera);
         }
+
     }
 }
