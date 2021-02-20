@@ -9,7 +9,7 @@ using AForge.Video.DirectShow;
 
 namespace Multi_cap_img
 {
-    static class Program
+    static partial class Program
     {
         /// <summary>
         /// The main entry point for the application.

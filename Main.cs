@@ -31,12 +31,12 @@ namespace Multi_cap_img
 
         private void Main_Load(object sender, EventArgs e)
         {
-            // get_deviceCamera();
 
             // Create Thread
             Thread UDPserver = new Thread(new ThreadStart(ServerListen));
             UDPserver.Start();
             Global.isStartUDPServer = true;
+            CameraControl_tab.Enabled = false;
         }
         private void Settings_Click(object sender, EventArgs e)
         {
@@ -216,15 +216,140 @@ namespace Multi_cap_img
             get_deviceCamera();
         }
 
+        void CameraOptionsFocus_Update_Set(VideoCaptureDevice CaptureDeviceFrame)
+        {
+            if (Focus_Auto.Enabled && Focus_Auto.Checked)
+                Global.CameraOption_set_Update((int)CameraControlProperty.Focus, (int)Focus_numericBox.Value, (int)CameraControlFlags.Auto);
+            else
+                Global.CameraOption_set_Update((int)CameraControlProperty.Focus, (int)Focus_numericBox.Value, (int)CameraControlFlags.Manual);
+        }
+
+        void CameraOptionsPan_Update_Set(VideoCaptureDevice CaptureDeviceFrame)
+        {
+            if (Pan_Auto.Enabled && Pan_Auto.Checked)
+                Global.CameraOption_set_Update((int)CameraControlProperty.Pan, (int)Pan_numericBox.Value, (int)CameraControlFlags.Auto);
+            else
+                Global.CameraOption_set_Update((int)CameraControlProperty.Pan, (int)Pan_numericBox.Value, (int)CameraControlFlags.Manual);
+        }
+        void CameraOptionsTilt_Update_Set(VideoCaptureDevice CaptureDeviceFrame)
+        {
+            if (Tilt_Auto.Enabled && Tilt_Auto.Checked)
+                Global.CameraOption_set_Update((int)CameraControlProperty.Tilt, (int)Tilt_numericBox.Value, (int)CameraControlFlags.Auto);
+            else
+                Global.CameraOption_set_Update((int)CameraControlProperty.Tilt, (int)Tilt_numericBox.Value, (int)CameraControlFlags.Manual);
+        }
+
+        void CameraOptionsRoll_Update_Set(VideoCaptureDevice CaptureDeviceFrame)
+        {
+            if (Roll_Auto.Enabled && Roll_Auto.Checked)
+                Global.CameraOption_set_Update((int)CameraControlProperty.Roll, (int)Roll_numericBox.Value, (int)CameraControlFlags.Auto);
+            else
+                Global.CameraOption_set_Update((int)CameraControlProperty.Roll, (int)Roll_numericBox.Value, (int)CameraControlFlags.Manual);
+        }
+
+        void CameraOptionsZoom_Update_Set(VideoCaptureDevice CaptureDeviceFrame)
+        {
+            if (Zoom_Auto.Enabled && Zoom_Auto.Checked)
+                Global.CameraOption_set_Update((int)CameraControlProperty.Zoom, (int)Zoom_numericBox.Value, (int)CameraControlFlags.Auto);
+            else
+                Global.CameraOption_set_Update((int)CameraControlProperty.Zoom, (int)Zoom_numericBox.Value, (int)CameraControlFlags.Manual);
+        }
+
+        void CameraOptionsExposure_Update_Set(VideoCaptureDevice CaptureDeviceFrame)
+        {
+            if (Exposure_Auto.Enabled && Exposure_Auto.Checked)
+                Global.CameraOption_set_Update((int)CameraControlProperty.Exposure, (int)Exposure_numericBox.Value, (int)CameraControlFlags.Auto);
+            else
+                Global.CameraOption_set_Update((int)CameraControlProperty.Exposure, (int)Exposure_numericBox.Value, (int)CameraControlFlags.Manual);
+        }
+
+        void CameraOptionsIris_Update_Set(VideoCaptureDevice CaptureDeviceFrame)
+        {
+            if (Iris_Auto.Enabled && Iris_Auto.Checked)
+                Global.CameraOption_set_Update((int)CameraControlProperty.Iris, (int)Iris_numericBox.Value, (int)CameraControlFlags.Auto);
+            else
+                Global.CameraOption_set_Update((int)CameraControlProperty.Iris, (int)Iris_numericBox.Value, (int)CameraControlFlags.Manual);
+        }
+
         private void SelectDevicePreview_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (Global.isPreview)
             {
                 Global.CaptureDeviceFrame.Stop();
             }
-            Global.get_resolution(SelectDevicePreview.SelectedIndex);
+            Global.get_CameraInfomations(SelectDevicePreview.SelectedIndex);
             Update_resolution_box();
-            //Preview_Click(null, null);
+        }
+
+        private void Focus_TrackBar_ValueChanged(object sender, EventArgs e)
+        {
+            Focus_numericBox.Value = Focus_TrackBar.Value;
+            CameraOptionsFocus_Update_Set(Global.CaptureDeviceFrame);
+        }
+
+        private void Focus_numericBox_ValueChanged(object sender, EventArgs e)
+        {
+            Focus_TrackBar.Value = Convert.ToInt32(Focus_numericBox.Value);
+        }
+
+        private void Pan_TrackBar_ValueChanged(object sender, EventArgs e)
+        {
+            Pan_numericBox.Value = Pan_TrackBar.Value;
+        }
+
+        private void Pan_numericBox_ValueChanged(object sender, EventArgs e)
+        {
+            Pan_TrackBar.Value = Convert.ToInt32(Pan_numericBox.Value);
+        }
+
+        private void Tilt_TrackBar_ValueChanged(object sender, EventArgs e)
+        {
+            Tilt_numericBox.Value = Tilt_TrackBar.Value;
+        }
+
+        private void Tilt_numericBox_ValueChanged(object sender, EventArgs e)
+        {
+            Tilt_TrackBar.Value = Convert.ToInt32(Tilt_numericBox.Value);
+        }
+
+        private void Roll_numericBox_ValueChanged(object sender, EventArgs e)
+        {
+            Roll_TrackBar.Value = Convert.ToInt32(Roll_numericBox.Value);
+        }
+
+        private void Roll_TrackBar_ValueChanged(object sender, EventArgs e)
+        {
+            Roll_numericBox.Value = Roll_TrackBar.Value;
+        }
+
+        private void Zoom_TrackBar_ValueChanged(object sender, EventArgs e)
+        {
+            Zoom_numericBox.Value = Zoom_TrackBar.Value;
+        }
+
+        private void Zoom_numericBox_ValueChanged(object sender, EventArgs e)
+        {
+            Zoom_TrackBar.Value = Convert.ToInt32(Zoom_numericBox.Value);
+        }
+
+        private void Exposure_trackBar_ValueChanged(object sender, EventArgs e)
+        {
+            Exposure_numericBox.Value = Exposure_trackBar.Value;
+        }
+
+        private void Exposure_numericBox_ValueChanged(object sender, EventArgs e)
+        {
+            Exposure_trackBar.Value = Convert.ToInt32(Exposure_numericBox.Value);
+        }
+
+        private void Iris_TrackBar_ValueChanged(object sender, EventArgs e)
+        {
+            Iris_numericBox.Value = Iris_TrackBar.Value;
+        }
+
+        private void Iris_numericBox_ValueChanged(object sender, EventArgs e)
+        {
+            Iris_TrackBar.Value = Convert.ToInt32(Iris_numericBox.Value);
         }
 
         private void ResolutionBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -234,8 +359,308 @@ namespace Multi_cap_img
                 Global.CaptureDeviceFrame.Stop();
             }
             Global.ResolutionPreview_Previous = ResolutionBox.SelectedIndex;
+
+            if (ResolutionBox.SelectedIndex != -1)
+            {
+                CameraControl_tab.Enabled = true;
+                get_CameraPropertyReange_set_FormCameraSetting();
+            }
             //Preview_Click(null, null);
         }
+
+        private void get_CameraPropertyReange_set_FormCameraSetting()
+        {
+            Focus_ctl_set();
+            Tilt_ctl_set();
+            Pan_ctl_set();
+            Roll_ctl_set();
+            Zoom_ctl_set();
+            Exposure_ctl_set();
+            Iris_ctl_set();
+            All_ctl_set_val();
+        }
+        private void All_ctl_set_val()
+        {
+            Focus_TrackBar.Value = Convert.ToInt32(Global.focus_defaultValue);
+            Pan_TrackBar.Value = Convert.ToInt32(Global.pan_defaultValue);
+            Tilt_TrackBar.Value = Convert.ToInt32(Global.tilt_defaultValue);
+            Roll_TrackBar.Value = Convert.ToInt32(Global.roll_defaultValue);
+            Zoom_TrackBar.Value = Convert.ToInt32(Global.zoom_defaultValue);
+            Iris_TrackBar.Value = Convert.ToInt32(Global.iris_defaultValue);
+            Exposure_trackBar.Value = Convert.ToInt32(Global.exposure_defaultValue);
+            Focus_numericBox.Value = Convert.ToInt32(Global.focus_defaultValue);
+            Pan_numericBox.Value = Convert.ToInt32(Global.pan_defaultValue);
+            Tilt_numericBox.Value = Convert.ToInt32(Global.tilt_defaultValue);
+            Roll_numericBox.Value = Convert.ToInt32(Global.roll_defaultValue);
+            Zoom_numericBox.Value = Convert.ToInt32(Global.zoom_defaultValue);
+            Exposure_numericBox.Value = Convert.ToInt32(Global.exposure_defaultValue);
+            Iris_numericBox.Value = Convert.ToInt32(Global.iris_defaultValue);
+        }
+
+        private void Focus_ctl_set()
+        {
+            Focus_numericBox.Maximum = Global.focus_maxValue;
+            Focus_numericBox.Minimum = Global.focus_minValue;
+            Focus_TrackBar.Maximum = Global.focus_maxValue;
+            Focus_TrackBar.Minimum = Global.focus_minValue;
+            if (Global.focus_CameraControlFlags == CameraControlFlags.None)
+            {
+                Focus_form_ctl_disable();
+                Focus_Auto.Enabled = false;
+            }
+            else
+            {
+                Focus_form_ctl_enable();
+                Focus_Auto.Enabled = true;
+            }
+        }
+
+        private void Pan_ctl_set()
+        {
+            Pan_numericBox.Maximum = Global.pan_maxValue;
+            Pan_numericBox.Minimum = Global.pan_minValue;
+            Pan_TrackBar.Maximum = Global.pan_maxValue;
+            Pan_TrackBar.Minimum = Global.pan_minValue;
+            if (Global.pan_CameraControlFlags == CameraControlFlags.None)
+            {
+                Pan_form_ctl_disable();
+                Pan_Auto.Enabled = false;
+            }
+            else
+            {
+                Pan_form_ctl_enable();
+                Pan_Auto.Enabled = true;
+            }
+        }
+        private void Tilt_ctl_set()
+        {
+            Tilt_numericBox.Maximum = Global.tilt_maxValue;
+            Tilt_numericBox.Minimum = Global.tilt_minValue;
+            Tilt_TrackBar.Maximum = Global.tilt_maxValue;
+            Tilt_TrackBar.Minimum = Global.tilt_minValue;
+            if (Global.tilt_CameraControlFlags == CameraControlFlags.None)
+            {
+                Tilt_form_ctl_disable();
+                Tilt_Auto.Enabled = false;
+            }
+            else
+            {
+                Tilt_form_ctl_enable();
+                Tilt_Auto.Enabled = true;
+            }
+        }
+
+        private void Roll_ctl_set()
+        {
+            Roll_numericBox.Maximum = Global.roll_maxValue;
+            Roll_numericBox.Minimum = Global.roll_minValue;
+            Roll_TrackBar.Maximum = Global.roll_maxValue;
+            Roll_TrackBar.Minimum = Global.roll_minValue;
+            if(Global.tilt_CameraControlFlags == CameraControlFlags.None)
+            {
+                Roll_form_ctl_disable();
+                Roll_Auto.Enabled = false;
+            }
+            else
+            {
+                Roll_form_ctl_enable();
+                Roll_Auto.Enabled = true;
+            }
+        }
+
+        private void Zoom_ctl_set()
+        {
+            Zoom_numericBox.Maximum = Global.zoom_maxValue;
+            Zoom_numericBox.Minimum = Global.zoom_minValue;
+            Zoom_TrackBar.Maximum = Global.zoom_maxValue;
+            Zoom_TrackBar.Minimum = Global.zoom_minValue;
+            if (Global.zoom_CameraControlFlags == CameraControlFlags.None)
+            {
+                Zoom_form_ctl_disable();
+                Zoom_Auto.Enabled = false;
+            }
+            else
+            {
+                Zoom_form_ctl_enable();
+                Zoom_Auto.Enabled = true;
+            }
+        }
+
+        private void Exposure_ctl_set()
+        {
+            Exposure_numericBox.Maximum = Global.exposure_maxValue;
+            Exposure_numericBox.Minimum = Global.exposure_minValue;
+            Exposure_trackBar.Maximum = Global.exposure_maxValue;
+            Exposure_trackBar.Minimum = Global.exposure_minValue;
+            if(Global.exposure_CameraControlFlags == CameraControlFlags.None)
+            {
+                Exposure_form_ctl_disable();
+                Exposure_Auto.Enabled = false;
+            }
+            else
+            {
+                Exposure_form_ctl_enable();
+                Exposure_Auto.Enabled = true;
+            }
+        }
+
+        private void Iris_ctl_set()
+        {
+            Iris_numericBox.Maximum = Global.iris_maxValue;
+            Iris_numericBox.Minimum = Global.iris_minValue;
+            Iris_TrackBar.Maximum = Global.iris_maxValue;
+            Iris_TrackBar.Minimum = Global.iris_minValue;
+            if (Global.iris_CameraControlFlags == CameraControlFlags.None)
+            {
+                Iris_form_ctl_disable();
+                Iris_Auto.Enabled = false;
+            }
+            else
+            {
+                Iris_form_ctl_enable();
+                Iris_Auto.Enabled = true;
+            }
+        }
+
+        private void Focus_form_ctl_disable() {
+            Focus_label.Enabled = false;
+            Focus_TrackBar.Enabled = false;
+            Focus_numericBox.Enabled = false;
+        }
+
+        private void Focus_form_ctl_enable()
+        {
+            Focus_label.Enabled = true;
+            Focus_TrackBar.Enabled = true;
+            Focus_numericBox.Enabled = true;
+        }
+
+        private void Pan_form_ctl_disable()
+        {
+            Pan_label.Enabled = false;
+            Pan_TrackBar.Enabled = false;
+            Pan_numericBox.Enabled = false;
+        }
+
+        private void Pan_form_ctl_enable()
+        {
+            Pan_label.Enabled = true;
+            Pan_TrackBar.Enabled = true;
+            Pan_numericBox.Enabled = true;
+        }
+
+        private void Tilt_form_ctl_disable()
+        {
+            Tilt_label.Enabled = false;
+            Tilt_TrackBar.Enabled = false;
+            Tilt_numericBox.Enabled = false;
+        }
+
+        private void Tilt_form_ctl_enable()
+        {
+            Tilt_label.Enabled = true;
+            Tilt_TrackBar.Enabled = true;
+            Tilt_numericBox.Enabled = true;
+        }
+
+        private void Roll_form_ctl_disable()
+        {
+            Roll_label.Enabled = false;
+            Roll_TrackBar.Enabled = false;
+            Roll_numericBox.Enabled = false;
+        }
+
+        private void Roll_form_ctl_enable()
+        {
+            Roll_label.Enabled = true;
+            Roll_TrackBar.Enabled = true;
+            Roll_numericBox.Enabled = true;
+        }
+
+        private void Zoom_form_ctl_disable()
+        {
+            Zoom_label.Enabled = false;
+            Zoom_TrackBar.Enabled = false;
+            Zoom_numericBox.Enabled = false;
+
+        }
+
+        private void Zoom_form_ctl_enable()
+        {
+            Zoom_label.Enabled = true;
+            Zoom_TrackBar.Enabled = true;
+            Zoom_numericBox.Enabled = true;
+        }
+
+        private void Exposure_form_ctl_disable()
+        {
+            Exposure_label.Enabled = false;
+            Exposure_trackBar.Enabled = false;
+            Exposure_numericBox.Enabled = false;
+        }
+
+        private void Exposure_form_ctl_enable()
+        {
+            Exposure_label.Enabled = true;
+            Exposure_trackBar.Enabled = true;
+            Exposure_numericBox.Enabled = true;
+        }
+
+        private void Iris_form_ctl_disable()
+        {
+            Iris_label.Enabled = false;
+            Iris_TrackBar.Enabled = false;
+            Iris_numericBox.Enabled = false;
+        }
+
+        private void Iris_form_ctl_enable()
+        {
+            Iris_label.Enabled = true;
+            Iris_TrackBar.Enabled = true;
+            Iris_numericBox.Enabled = true;
+        }
+
+        private void Focus_Auto_CheckedChanged(object sender, EventArgs e)
+        {
+            (Focus_Auto.Checked ? (Action)Focus_form_ctl_disable: Focus_form_ctl_enable)();
+            CameraOptionsFocus_Update_Set(Global.CaptureDeviceFrame);
+        }
+
+        private void Pan_Auto_CheckedChanged(object sender, EventArgs e)
+        {
+            (Pan_Auto.Checked ? (Action)Pan_form_ctl_disable : Pan_form_ctl_enable)();
+            CameraOptionsPan_Update_Set(Global.CaptureDeviceFrame);
+        }
+        private void Tilt_Auto_CheckedChanged(object sender, EventArgs e)
+        {
+            (Tilt_Auto.Checked ? (Action)Tilt_form_ctl_disable : Tilt_form_ctl_enable)();
+            CameraOptionsTilt_Update_Set(Global.CaptureDeviceFrame);
+        }
+
+        private void Roll_Auto_CheckedChanged(object sender, EventArgs e)
+        {
+            (Roll_Auto.Checked ? (Action)Roll_form_ctl_disable : Roll_form_ctl_enable)();
+            CameraOptionsRoll_Update_Set(Global.CaptureDeviceFrame);
+        }
+
+        private void Zoom_Auto_CheckedChanged(object sender, EventArgs e)
+        {
+            (Zoom_Auto.Checked ? (Action)Zoom_form_ctl_disable : Zoom_form_ctl_enable)();
+            CameraOptionsZoom_Update_Set(Global.CaptureDeviceFrame);
+        }
+
+        private void Exposure_Auto_CheckedChanged(object sender, EventArgs e)
+        {
+            (Exposure_Auto.Checked ? (Action)Exposure_form_ctl_disable : Exposure_form_ctl_enable)();
+            CameraOptionsExposure_Update_Set(Global.CaptureDeviceFrame);
+        }
+
+        private void Iris_Auto_CheckedChanged(object sender, EventArgs e)
+        {
+            (Iris_Auto.Checked ? (Action)Iris_form_ctl_disable : Iris_form_ctl_enable)();
+            CameraOptionsIris_Update_Set(Global.CaptureDeviceFrame);
+        }
+
 
         [Obsolete]
         private void btnCapture_Click(object sender, EventArgs e)
@@ -246,7 +671,6 @@ namespace Multi_cap_img
                 if (Global.isPreview)
                 {
                     Global.CaptureDeviceFrame.SignalToStop();
-                    //Global.CaptureDeviceFrame.Stop();
                     Global.isPreview = false;
                     StopPreview_Click(null, null);
                 }
@@ -341,8 +765,9 @@ namespace Multi_cap_img
             Global.Addlist_device_camera();
             VideoCaptureDevice CaptureDeviceFrame = new VideoCaptureDevice(Global.cameraDeviec[indexDevice].MonikerString);
             CaptureDeviceFrame.NewFrame += new NewFrameEventHandler(CaptureNewFrame);
+            //CameraOptions_Set(CaptureDeviceFrame);
             CaptureDeviceFrame.VideoResolution = CaptureDeviceFrame.VideoCapabilities[Convert.ToInt32(Global.setResolution_List[indexDevice])];
-            //CaptureDeviceFrame.SetCameraProperty(CameraControlProperty.Exposure, +20, CameraControlFlags.Auto);
+
             Global.CaptureDeviceFrame_pool.Add(CaptureDeviceFrame);
             Thread theard = Thread.CurrentThread;
             string souce_device = CaptureDeviceFrame.Source;
@@ -351,6 +776,5 @@ namespace Multi_cap_img
             CaptureDeviceFrame.Start();
             logs_box(Logs_txt.theard_start + number_cramera);
         }
-
     }
 }

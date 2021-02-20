@@ -28,6 +28,55 @@ namespace Multi_cap_img
         public static List<VideoCaptureDevice> CaptureDeviceFrame_pool = new List<VideoCaptureDevice>();
         public static Dictionary<int, int> setResolution_List = new Dictionary<int, int>();
 
+        // Option focus value
+        public static int focus_minValue = -255;
+        public static int focus_maxValue = 255;
+        public static int focus_stepSize = 0;
+        public static int focus_defaultValue = 0;
+        public static CameraControlFlags focus_CameraControlFlags;
+
+        // Option pan value
+        public static int pan_minValue = -255;
+        public static int pan_maxValue = 255;
+        public static int pan_stepSize = 0;
+        public static int pan_defaultValue = 0;
+        public static CameraControlFlags pan_CameraControlFlags;
+
+        // Option pan value
+        public static int tilt_minValue = -255;
+        public static int tilt_maxValue = 255;
+        public static int tilt_stepSize = 0;
+        public static int tilt_defaultValue = 0;
+        public static CameraControlFlags tilt_CameraControlFlags;
+
+        // Option roll value
+        public static int roll_minValue = -255;
+        public static int roll_maxValue = 255;
+        public static int roll_stepSize = 0;
+        public static int roll_defaultValue = 0;
+        public static CameraControlFlags roll_CameraControlFlags;
+
+        // Option zoom value
+        public static int zoom_minValue = -255;
+        public static int zoom_maxValue = 255;
+        public static int zoom_stepSize = 0;
+        public static int zoom_defaultValue = 0;
+        public static CameraControlFlags zoom_CameraControlFlags;
+
+        // Option exposure value
+        public static int exposure_minValue = -255;
+        public static int exposure_maxValue = 255;
+        public static int exposure_stepSize = 0;
+        public static int exposure_defaultValue = 0;
+        public static CameraControlFlags exposure_CameraControlFlags;
+
+        // Option iris value
+        public static int iris_minValue = -255;
+        public static int iris_maxValue = 255;
+        public static int iris_stepSize = 0;
+        public static int iris_defaultValue = 0;
+        public static CameraControlFlags iris_CameraControlFlags;
+
         private static void GetDevice_Camera()
         {
             cameraDeviec = null;
@@ -60,7 +109,7 @@ namespace Multi_cap_img
             return DevicesList;
         }
 
-        public static void get_resolution(int index_select)
+        public static void get_CameraInfomations(int index_select)
         {
             Global.CaptureDeviceFrame = new VideoCaptureDevice(Global.cameraDeviec[index_select].MonikerString);
             int VideoCapabilitie_length = Global.CaptureDeviceFrame.VideoCapabilities.Length;
@@ -75,9 +124,111 @@ namespace Multi_cap_img
                 string fps_Device = CaptureDeviceFrame.VideoCapabilities[index].MaximumFrameRate.ToString();
                 //Console.WriteLine("resolution , resolution_size>> " + resolution + " " + resolution_size + " " + fps_Device);
                 string str_concat = Width_resolution + " X " + Height_resolution + " fps(" + fps_Device + ")";
-                Console.WriteLine();
                 Resolution_List.Add(str_concat);
-                Console.WriteLine(str_concat);
+                //Console.WriteLine(str_concat);
+            }
+
+            CaptureDeviceFrame.GetCameraPropertyRange(CameraControlProperty.Focus, out focus_minValue, out focus_maxValue, out focus_stepSize, out focus_defaultValue, out focus_CameraControlFlags);
+            CaptureDeviceFrame.GetCameraPropertyRange(CameraControlProperty.Pan, out pan_minValue, out pan_maxValue, out pan_stepSize, out pan_defaultValue, out pan_CameraControlFlags);
+            CaptureDeviceFrame.GetCameraPropertyRange(CameraControlProperty.Tilt, out tilt_minValue, out tilt_maxValue, out tilt_stepSize, out tilt_defaultValue, out tilt_CameraControlFlags);
+            CaptureDeviceFrame.GetCameraPropertyRange(CameraControlProperty.Roll, out roll_minValue, out roll_maxValue, out roll_stepSize, out roll_defaultValue, out roll_CameraControlFlags);
+            CaptureDeviceFrame.GetCameraPropertyRange(CameraControlProperty.Zoom, out zoom_minValue, out zoom_maxValue, out zoom_stepSize, out zoom_defaultValue, out zoom_CameraControlFlags);
+            CaptureDeviceFrame.GetCameraPropertyRange(CameraControlProperty.Exposure, out exposure_minValue, out exposure_maxValue, out exposure_stepSize, out exposure_defaultValue, out exposure_CameraControlFlags);
+            CaptureDeviceFrame.GetCameraPropertyRange(CameraControlProperty.Iris, out iris_minValue, out iris_maxValue, out iris_stepSize, out iris_defaultValue, out iris_CameraControlFlags);
+            Console.WriteLine("GetCameraPropertyRange");
+        }
+
+        public static void CameraOption_set_Update(int Option_menu, int value, int option_mORa)
+        {
+            if ((Option_menu == (int)CameraControlProperty.Focus) && (option_mORa == (int)CameraControlFlags.Auto))
+            {
+                CaptureDeviceFrame.SetCameraProperty(CameraControlProperty.Focus, value, CameraControlFlags.Auto);
+            }
+            else if((Option_menu == (int)CameraControlProperty.Focus) && (option_mORa == (int)CameraControlFlags.Manual))
+            {
+                CaptureDeviceFrame.SetCameraProperty(CameraControlProperty.Focus, value, CameraControlFlags.Manual);
+            }
+            else
+            {
+                CaptureDeviceFrame.SetCameraProperty(CameraControlProperty.Focus, value, CameraControlFlags.None);
+            }
+
+            if ((Option_menu == (int)CameraControlProperty.Pan) && (option_mORa == (int)CameraControlFlags.Auto))
+            {
+                CaptureDeviceFrame.SetCameraProperty(CameraControlProperty.Pan, value, CameraControlFlags.Auto);
+            }
+            else if ((Option_menu == (int)CameraControlProperty.Pan) && (option_mORa == (int)CameraControlFlags.Manual))
+            {
+                CaptureDeviceFrame.SetCameraProperty(CameraControlProperty.Pan, value, CameraControlFlags.Manual);
+            }
+            else
+            {
+                CaptureDeviceFrame.SetCameraProperty(CameraControlProperty.Pan, value, CameraControlFlags.None);
+            }
+
+            if ((Option_menu == (int)CameraControlProperty.Tilt) && (option_mORa == (int)CameraControlFlags.Auto))
+            {
+                CaptureDeviceFrame.SetCameraProperty(CameraControlProperty.Tilt, value, CameraControlFlags.Auto);
+            }
+            else if ((Option_menu == (int)CameraControlProperty.Tilt) && (option_mORa == (int)CameraControlFlags.Manual))
+            {
+                CaptureDeviceFrame.SetCameraProperty(CameraControlProperty.Tilt, value, CameraControlFlags.Manual);
+            }
+            else
+            {
+                CaptureDeviceFrame.SetCameraProperty(CameraControlProperty.Tilt, value, CameraControlFlags.None);
+            }
+
+            if ((Option_menu == (int)CameraControlProperty.Roll) && (option_mORa == (int)CameraControlFlags.Auto))
+            {
+                CaptureDeviceFrame.SetCameraProperty(CameraControlProperty.Roll, value, CameraControlFlags.Auto);
+            }
+            else if ((Option_menu == (int)CameraControlProperty.Roll) && (option_mORa == (int)CameraControlFlags.Manual))
+            {
+                CaptureDeviceFrame.SetCameraProperty(CameraControlProperty.Roll, value, CameraControlFlags.Manual);
+            }
+            else
+            {
+                CaptureDeviceFrame.SetCameraProperty(CameraControlProperty.Roll, value, CameraControlFlags.None);
+            }
+
+            if ((Option_menu == (int)CameraControlProperty.Zoom) && (option_mORa == (int)CameraControlFlags.Auto))
+            { 
+                CaptureDeviceFrame.SetCameraProperty(CameraControlProperty.Zoom, value, CameraControlFlags.Auto);
+            }
+            else if ((Option_menu == (int)CameraControlProperty.Zoom) && (option_mORa == (int)CameraControlFlags.Manual))
+            {
+                CaptureDeviceFrame.SetCameraProperty(CameraControlProperty.Zoom, value, CameraControlFlags.Manual);
+            }
+            else
+            {
+                CaptureDeviceFrame.SetCameraProperty(CameraControlProperty.Zoom, value, CameraControlFlags.None);
+            }
+
+            if ((Option_menu == (int)CameraControlProperty.Exposure) && (option_mORa == (int)CameraControlFlags.Auto))
+            {
+                CaptureDeviceFrame.SetCameraProperty(CameraControlProperty.Exposure, value, CameraControlFlags.Auto);
+            }
+            else if ((Option_menu == (int)CameraControlProperty.Exposure) && (option_mORa == (int)CameraControlFlags.Manual))
+            {
+                CaptureDeviceFrame.SetCameraProperty(CameraControlProperty.Exposure, value, CameraControlFlags.Manual);
+            }
+            else
+            {
+                CaptureDeviceFrame.SetCameraProperty(CameraControlProperty.Exposure, value, CameraControlFlags.None);
+            }
+
+            if ((Option_menu == (int)CameraControlProperty.Iris) && (option_mORa == (int)CameraControlFlags.Auto))
+            {
+                CaptureDeviceFrame.SetCameraProperty(CameraControlProperty.Iris, value, CameraControlFlags.Auto);
+            }
+            else if ((Option_menu == (int)CameraControlProperty.Iris) && (option_mORa == (int)CameraControlFlags.Manual))
+            {
+                CaptureDeviceFrame.SetCameraProperty(CameraControlProperty.Iris, value, CameraControlFlags.Manual);
+            }
+            else
+            {
+                CaptureDeviceFrame.SetCameraProperty(CameraControlProperty.Iris, value, CameraControlFlags.None);
             }
         }
     } 
