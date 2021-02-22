@@ -216,7 +216,7 @@ namespace Multi_cap_img
             get_deviceCamera();
         }
 
-        void CameraOptionsFocus_Update_Set(VideoCaptureDevice CaptureDeviceFrame)
+        void CameraOptionsFocus_Update_Set()
         {
             if (Focus_Auto.Enabled && Focus_Auto.Checked)
                 Global.CameraOption_set_Update((int)CameraControlProperty.Focus, (int)Focus_numericBox.Value, (int)CameraControlFlags.Auto);
@@ -224,14 +224,14 @@ namespace Multi_cap_img
                 Global.CameraOption_set_Update((int)CameraControlProperty.Focus, (int)Focus_numericBox.Value, (int)CameraControlFlags.Manual);
         }
 
-        void CameraOptionsPan_Update_Set(VideoCaptureDevice CaptureDeviceFrame)
+        void CameraOptionsPan_Update_Set()
         {
             if (Pan_Auto.Enabled && Pan_Auto.Checked)
                 Global.CameraOption_set_Update((int)CameraControlProperty.Pan, (int)Pan_numericBox.Value, (int)CameraControlFlags.Auto);
             else
-                Global.CameraOption_set_Update((int)CameraControlProperty.Pan, (int)Pan_numericBox.Value, (int)CameraControlFlags.Manual);
+                Global.CameraOption_set_Update((int)CameraControlProperty.Pan, (int)Pan_numericBox.Value, (int)CameraControlFlags.None);
         }
-        void CameraOptionsTilt_Update_Set(VideoCaptureDevice CaptureDeviceFrame)
+        void CameraOptionsTilt_Update_Set()
         {
             if (Tilt_Auto.Enabled && Tilt_Auto.Checked)
                 Global.CameraOption_set_Update((int)CameraControlProperty.Tilt, (int)Tilt_numericBox.Value, (int)CameraControlFlags.Auto);
@@ -239,7 +239,7 @@ namespace Multi_cap_img
                 Global.CameraOption_set_Update((int)CameraControlProperty.Tilt, (int)Tilt_numericBox.Value, (int)CameraControlFlags.Manual);
         }
 
-        void CameraOptionsRoll_Update_Set(VideoCaptureDevice CaptureDeviceFrame)
+        void CameraOptionsRoll_Update_Set()
         {
             if (Roll_Auto.Enabled && Roll_Auto.Checked)
                 Global.CameraOption_set_Update((int)CameraControlProperty.Roll, (int)Roll_numericBox.Value, (int)CameraControlFlags.Auto);
@@ -247,15 +247,15 @@ namespace Multi_cap_img
                 Global.CameraOption_set_Update((int)CameraControlProperty.Roll, (int)Roll_numericBox.Value, (int)CameraControlFlags.Manual);
         }
 
-        void CameraOptionsZoom_Update_Set(VideoCaptureDevice CaptureDeviceFrame)
+        void CameraOptionsZoom_Update_Set()
         {
             if (Zoom_Auto.Enabled && Zoom_Auto.Checked)
                 Global.CameraOption_set_Update((int)CameraControlProperty.Zoom, (int)Zoom_numericBox.Value, (int)CameraControlFlags.Auto);
             else
-                Global.CameraOption_set_Update((int)CameraControlProperty.Zoom, (int)Zoom_numericBox.Value, (int)CameraControlFlags.Manual);
+                Global.CameraOption_set_Update((int)CameraControlProperty.Zoom, (int)Zoom_numericBox.Value, (int)CameraControlFlags.Auto);
         }
 
-        void CameraOptionsExposure_Update_Set(VideoCaptureDevice CaptureDeviceFrame)
+        void CameraOptionsExposure_Update_Set()
         {
             if (Exposure_Auto.Enabled && Exposure_Auto.Checked)
                 Global.CameraOption_set_Update((int)CameraControlProperty.Exposure, (int)Exposure_numericBox.Value, (int)CameraControlFlags.Auto);
@@ -263,7 +263,7 @@ namespace Multi_cap_img
                 Global.CameraOption_set_Update((int)CameraControlProperty.Exposure, (int)Exposure_numericBox.Value, (int)CameraControlFlags.Manual);
         }
 
-        void CameraOptionsIris_Update_Set(VideoCaptureDevice CaptureDeviceFrame)
+        void CameraOptionsIris_Update_Set()
         {
             if (Iris_Auto.Enabled && Iris_Auto.Checked)
                 Global.CameraOption_set_Update((int)CameraControlProperty.Iris, (int)Iris_numericBox.Value, (int)CameraControlFlags.Auto);
@@ -284,7 +284,7 @@ namespace Multi_cap_img
         private void Focus_TrackBar_ValueChanged(object sender, EventArgs e)
         {
             Focus_numericBox.Value = Focus_TrackBar.Value;
-            CameraOptionsFocus_Update_Set(Global.CaptureDeviceFrame);
+            CameraOptionsFocus_Update_Set();
         }
 
         private void Focus_numericBox_ValueChanged(object sender, EventArgs e)
@@ -295,6 +295,7 @@ namespace Multi_cap_img
         private void Pan_TrackBar_ValueChanged(object sender, EventArgs e)
         {
             Pan_numericBox.Value = Pan_TrackBar.Value;
+            CameraOptionsPan_Update_Set();
         }
 
         private void Pan_numericBox_ValueChanged(object sender, EventArgs e)
@@ -305,6 +306,7 @@ namespace Multi_cap_img
         private void Tilt_TrackBar_ValueChanged(object sender, EventArgs e)
         {
             Tilt_numericBox.Value = Tilt_TrackBar.Value;
+            CameraOptionsTilt_Update_Set();
         }
 
         private void Tilt_numericBox_ValueChanged(object sender, EventArgs e)
@@ -315,6 +317,7 @@ namespace Multi_cap_img
         private void Roll_numericBox_ValueChanged(object sender, EventArgs e)
         {
             Roll_TrackBar.Value = Convert.ToInt32(Roll_numericBox.Value);
+            CameraOptionsRoll_Update_Set();
         }
 
         private void Roll_TrackBar_ValueChanged(object sender, EventArgs e)
@@ -325,6 +328,7 @@ namespace Multi_cap_img
         private void Zoom_TrackBar_ValueChanged(object sender, EventArgs e)
         {
             Zoom_numericBox.Value = Zoom_TrackBar.Value;
+            CameraOptionsZoom_Update_Set();
         }
 
         private void Zoom_numericBox_ValueChanged(object sender, EventArgs e)
@@ -335,6 +339,7 @@ namespace Multi_cap_img
         private void Exposure_trackBar_ValueChanged(object sender, EventArgs e)
         {
             Exposure_numericBox.Value = Exposure_trackBar.Value;
+            CameraOptionsExposure_Update_Set();
         }
 
         private void Exposure_numericBox_ValueChanged(object sender, EventArgs e)
@@ -345,6 +350,7 @@ namespace Multi_cap_img
         private void Iris_TrackBar_ValueChanged(object sender, EventArgs e)
         {
             Iris_numericBox.Value = Iris_TrackBar.Value;
+            CameraOptionsTilt_Update_Set();
         }
 
         private void Iris_numericBox_ValueChanged(object sender, EventArgs e)
@@ -412,6 +418,7 @@ namespace Multi_cap_img
             {
                 Focus_form_ctl_enable();
                 Focus_Auto.Enabled = true;
+                Focus_Auto.Checked = true;
             }
         }
 
@@ -430,6 +437,7 @@ namespace Multi_cap_img
             {
                 Pan_form_ctl_enable();
                 Pan_Auto.Enabled = true;
+                Pan_Auto.Checked = true;
             }
         }
         private void Tilt_ctl_set()
@@ -447,6 +455,7 @@ namespace Multi_cap_img
             {
                 Tilt_form_ctl_enable();
                 Tilt_Auto.Enabled = true;
+                Tilt_Auto.Checked = true;
             }
         }
 
@@ -465,6 +474,7 @@ namespace Multi_cap_img
             {
                 Roll_form_ctl_enable();
                 Roll_Auto.Enabled = true;
+                Roll_Auto.Checked = true;
             }
         }
 
@@ -482,7 +492,8 @@ namespace Multi_cap_img
             else
             {
                 Zoom_form_ctl_enable();
-                Zoom_Auto.Enabled = true;
+                Zoom_Auto.Enabled = false;
+                Zoom_Auto.Checked = false;
             }
         }
 
@@ -501,6 +512,7 @@ namespace Multi_cap_img
             {
                 Exposure_form_ctl_enable();
                 Exposure_Auto.Enabled = true;
+                Exposure_Auto.Checked = true;
             }
         }
 
@@ -519,6 +531,7 @@ namespace Multi_cap_img
             {
                 Iris_form_ctl_enable();
                 Iris_Auto.Enabled = true;
+                Iris_Auto.Checked = true;
             }
         }
 
@@ -623,42 +636,42 @@ namespace Multi_cap_img
         private void Focus_Auto_CheckedChanged(object sender, EventArgs e)
         {
             (Focus_Auto.Checked ? (Action)Focus_form_ctl_disable: Focus_form_ctl_enable)();
-            CameraOptionsFocus_Update_Set(Global.CaptureDeviceFrame);
+            CameraOptionsFocus_Update_Set();
         }
 
         private void Pan_Auto_CheckedChanged(object sender, EventArgs e)
         {
             (Pan_Auto.Checked ? (Action)Pan_form_ctl_disable : Pan_form_ctl_enable)();
-            CameraOptionsPan_Update_Set(Global.CaptureDeviceFrame);
+            CameraOptionsPan_Update_Set();
         }
         private void Tilt_Auto_CheckedChanged(object sender, EventArgs e)
         {
             (Tilt_Auto.Checked ? (Action)Tilt_form_ctl_disable : Tilt_form_ctl_enable)();
-            CameraOptionsTilt_Update_Set(Global.CaptureDeviceFrame);
+            CameraOptionsTilt_Update_Set();
         }
 
         private void Roll_Auto_CheckedChanged(object sender, EventArgs e)
         {
             (Roll_Auto.Checked ? (Action)Roll_form_ctl_disable : Roll_form_ctl_enable)();
-            CameraOptionsRoll_Update_Set(Global.CaptureDeviceFrame);
+            CameraOptionsRoll_Update_Set();
         }
 
         private void Zoom_Auto_CheckedChanged(object sender, EventArgs e)
         {
             (Zoom_Auto.Checked ? (Action)Zoom_form_ctl_disable : Zoom_form_ctl_enable)();
-            CameraOptionsZoom_Update_Set(Global.CaptureDeviceFrame);
+            CameraOptionsZoom_Update_Set();
         }
 
         private void Exposure_Auto_CheckedChanged(object sender, EventArgs e)
         {
             (Exposure_Auto.Checked ? (Action)Exposure_form_ctl_disable : Exposure_form_ctl_enable)();
-            CameraOptionsExposure_Update_Set(Global.CaptureDeviceFrame);
+            CameraOptionsExposure_Update_Set();
         }
 
         private void Iris_Auto_CheckedChanged(object sender, EventArgs e)
         {
             (Iris_Auto.Checked ? (Action)Iris_form_ctl_disable : Iris_form_ctl_enable)();
-            CameraOptionsIris_Update_Set(Global.CaptureDeviceFrame);
+            CameraOptionsIris_Update_Set();
         }
 
 
@@ -692,6 +705,14 @@ namespace Multi_cap_img
 
         private void Apply_setprop_Click(object sender, EventArgs e)
         {
+            if (MessageBox.Show("Are you sure you want to change the setting for camera", "Setting Confirm", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
+            {
+                Confirm_apply();
+            }
+        }
+
+        void Confirm_apply()
+        {
             if (!CheckSync.Checked)
             {
                 Global.setResolution_List[SelectDevicePreview.SelectedIndex] = ResolutionBox.SelectedIndex;
@@ -700,8 +721,80 @@ namespace Multi_cap_img
             {
                 for (int index = 0; index < Global.SelectedDeviceList.Count; index++)
                 {
-                    Global.setResolution_List[SelectDevicePreview.SelectedIndex] = ResolutionBox.SelectedIndex;
+                    Global.setResolution_List[Global.SelectedDeviceList[index]] = ResolutionBox.SelectedIndex;
+                    Global.setFocus_List[Global.SelectedDeviceList[index]] = Focus_TrackBar.Value;
+                    Global.setPan_List[Global.SelectedDeviceList[index]] = Pan_TrackBar.Value;
+                    Global.setTilt_List[Global.SelectedDeviceList[index]] = Tilt_TrackBar.Value;
+                    Global.setRoll_List[Global.SelectedDeviceList[index]] = Roll_TrackBar.Value;
+                    Global.setZoom_List[Global.SelectedDeviceList[index]] = Zoom_TrackBar.Value;
+                    Global.setIris_List[Global.SelectedDeviceList[index]] = Iris_TrackBar.Value;
+                    Global.setExposure_List[Global.SelectedDeviceList[index]] = Exposure_trackBar.Value;
                 }
+                AddOptions_list();
+            }
+        }
+
+        void AddOptions_list()
+        {
+            Global.Option_list_sync.Clear();
+            if (Focus_Auto.Enabled && Focus_Auto.Checked) {
+                Global.Option_list_sync.Add((int)CameraControlProperty.Focus, (int)CameraControlFlags.Auto);
+            } else {
+                Global.Option_list_sync.Add((int)CameraControlProperty.Focus, (int)CameraControlFlags.Manual);
+            }
+
+            if (Pan_Auto.Enabled && Pan_Auto.Checked)
+            {
+                Global.Option_list_sync.Add((int)CameraControlProperty.Pan, (int)CameraControlFlags.Auto);
+            }
+            else
+            {
+                Global.Option_list_sync.Add((int)CameraControlProperty.Pan, (int)CameraControlFlags.Manual);
+            }
+
+            if (Tilt_Auto.Enabled && Tilt_Auto.Checked)
+            {
+                Global.Option_list_sync.Add((int)CameraControlProperty.Tilt, (int)CameraControlFlags.Auto);
+            }
+            else
+            {
+                Global.Option_list_sync.Add((int)CameraControlProperty.Tilt, (int)CameraControlFlags.Manual);
+            }
+
+            if (Roll_Auto.Enabled && Roll_Auto.Checked)
+            {
+                Global.Option_list_sync.Add((int)CameraControlProperty.Roll, (int)CameraControlFlags.Auto);
+            }
+            else
+            {
+                Global.Option_list_sync.Add((int)CameraControlProperty.Roll, (int)CameraControlFlags.Manual);
+            }
+
+            if(Zoom_Auto.Enabled && Zoom_Auto.Checked)
+            {
+                Global.Option_list_sync.Add((int)CameraControlProperty.Zoom, (int)CameraControlFlags.Auto);
+            }
+            else
+            {
+                Global.Option_list_sync.Add((int)CameraControlProperty.Zoom, (int)CameraControlFlags.Manual);
+            }
+
+            if(Exposure_Auto.Enabled && Exposure_Auto.Checked)
+            {
+                Global.Option_list_sync.Add((int)CameraControlProperty.Exposure, (int)CameraControlFlags.Auto);
+            }
+            else
+            {
+                Global.Option_list_sync.Add((int)CameraControlProperty.Exposure, (int)CameraControlFlags.Manual);
+            }
+
+            if (Iris_Auto.Enabled && Iris_Auto.Checked)
+            {
+                Global.Option_list_sync.Add((int)CameraControlProperty.Iris, (int)CameraControlFlags.Auto);
+            }
+            else
+            {
+                Global.Option_list_sync.Add((int)CameraControlProperty.Iris, (int)CameraControlFlags.Manual);
             }
         }
 
@@ -754,7 +847,11 @@ namespace Multi_cap_img
             string fileName = System.IO.Path.Combine(filepath + @"\" + mainPath + @"\"+ subPath, @"" + subPath + "_" + Global.DirCameraThr[subPath] + ".jpg");
             string fileName_conv = fileName.Replace(@"\\", @"\"); // Save file path bug wait fix
             bitmap.Save(fileName_conv, ImageFormat.Jpeg);
-            Global.DirCameraThr[subPath] = (Convert.ToInt32(Global.DirCameraThr[subPath]) + 1).ToString();
+            try
+            {
+                Global.DirCameraThr[subPath] = (Convert.ToInt32(Global.DirCameraThr[subPath]) + 1).ToString();
+            }
+            catch { }
             bitmap.Dispose();
             logs_box(fileName_conv);
         }
@@ -765,9 +862,8 @@ namespace Multi_cap_img
             Global.Addlist_device_camera();
             VideoCaptureDevice CaptureDeviceFrame = new VideoCaptureDevice(Global.cameraDeviec[indexDevice].MonikerString);
             CaptureDeviceFrame.NewFrame += new NewFrameEventHandler(CaptureNewFrame);
-            //CameraOptions_Set(CaptureDeviceFrame);
+            CameraCaptureSet(CaptureDeviceFrame, indexDevice);
             CaptureDeviceFrame.VideoResolution = CaptureDeviceFrame.VideoCapabilities[Convert.ToInt32(Global.setResolution_List[indexDevice])];
-
             Global.CaptureDeviceFrame_pool.Add(CaptureDeviceFrame);
             Thread theard = Thread.CurrentThread;
             string souce_device = CaptureDeviceFrame.Source;
@@ -775,6 +871,10 @@ namespace Multi_cap_img
             Global.DirCameraThr.Add(theard.Name, 0.ToString());
             CaptureDeviceFrame.Start();
             logs_box(Logs_txt.theard_start + number_cramera);
+        }
+        void CameraCaptureSet(VideoCaptureDevice CaptureDeviceFrame, int indexDevice)
+        {
+            Global.CameraOptions_Set(CaptureDeviceFrame, indexDevice);
         }
     }
 }
