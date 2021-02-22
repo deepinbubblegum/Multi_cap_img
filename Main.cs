@@ -85,6 +85,7 @@ namespace Multi_cap_img
             PreviewBox.Image = CapFrame;
         }
 
+        [Obsolete]
         public void ServerListen()
         {
             int recv;
@@ -110,6 +111,7 @@ namespace Multi_cap_img
             }
         }
 
+        [Obsolete]
         void UDP_controler(string udp_data)
         {
             string str = udp_data.ToUpper();
@@ -123,6 +125,11 @@ namespace Multi_cap_img
                 case "!P":
                     this.Invoke(new Action(() => {
                         Preview_stop();
+                    }));
+                    break;
+                case "C":
+                    this.Invoke(new Action(() => {
+                        btnCapture_Click(null, null);
                     }));
                     break;
                 default:
